@@ -25,7 +25,7 @@ public class TicketServlet extends HttpServlet {
         Ticket ticket = null;
 
         if (type != null) {
-            if (type.equals("application/json") || type.equals("plain/text")) {
+            if (type.equals("application/json") || type.equals("text/plain")) {
                 ticket = mapper.readValue(req.getInputStream(), Ticket.class);
                 tickets.add(ticket);
             } else if (type.equals("application/x-www-form-urlencoded")) {
