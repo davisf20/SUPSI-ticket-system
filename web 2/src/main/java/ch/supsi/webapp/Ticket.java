@@ -1,17 +1,27 @@
 package ch.supsi.webapp;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Ticket {
+    private static final AtomicInteger counter = new AtomicInteger(0);
+    private final int id;
     private String title;
     private String description;
     private String author;
 
     public Ticket(String title, String description, String author) {
+        this();
         this.title = title;
         this.description = description;
         this.author = author;
     }
 
     public Ticket() {
+        this.id = counter.incrementAndGet();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
