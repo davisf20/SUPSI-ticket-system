@@ -186,3 +186,56 @@ Ticket deleted
 ```PrettyPrint
 Ticket not found
 ```
+
+
+
+# Patch Ticket
+
+Used to modify a part of an existing Ticket.
+
+**URL** : `/api/tickets/*`
+
+**Method** : `PATCH`
+
+**Data constraints** (only the field/s to modify)
+
+```json
+{
+    "description": "[description of the ticket]"
+}
+```
+
+**Data example**
+
+```json
+{
+      "title": "New Ticket"
+}
+```
+
+## Success Response
+
+**Code** : `200 OK`
+
+**Content example** (the entire Ticket, not only the modified field/s)
+
+```json
+{
+      "id": 1,
+      "title": "New Ticket",
+      "description": "Description of the ticket 1",
+      "author": "Pippo"
+}
+```
+
+## Error Response
+
+**Condition** : If the requested Ticket doesn't exist.
+
+**Code** : `404 NOT FOUND`
+
+**Content** :
+
+```PrettyPrint
+Ticket not found
+```
