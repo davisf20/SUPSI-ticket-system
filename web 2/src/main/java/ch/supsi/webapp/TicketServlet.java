@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(value = "/tickets/*")
+@WebServlet(value = "/api/tickets/*")
 public class TicketServlet extends HttpServlet {
     private final ArrayList<Ticket> tickets = new ArrayList<>();
     ObjectMapper mapper = new ObjectMapper();
@@ -53,15 +53,6 @@ public class TicketServlet extends HttpServlet {
         if (type != null) {
             if (type.equals("application/json")) {
                 ticket = mapper.readValue(req.getInputStream(), Ticket.class);
-                tickets.add(ticket);
-                res.setStatus(201);
-                res.setHeader("Content-Type", "application/json");
-                res.getWriter().println(mapper.writeValueAsString(ticket));
-            } else if (type.equals("application/x-www-form-urlencoded")) {
-                String title = req.getParameter("title");
-                String description = req.getParameter("description");
-                String author = req.getParameter("author");
-                ticket = new Ticket(title, description, author);
                 tickets.add(ticket);
                 res.setStatus(201);
                 res.setHeader("Content-Type", "application/json");
@@ -111,9 +102,7 @@ public class TicketServlet extends HttpServlet {
             Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
             if (ticket != null) {
                 tickets.remove(ticket);
-                res.setStatus(200);
-                res.getWriter().println("Ticket deleted");
-                res.getWriter().println(mapper.writeValueAsString(ticket));
+                res.setStatus(204);
             } else {
                 res.setStatus(404);
                 res.getWriter().println("Ticket not found");

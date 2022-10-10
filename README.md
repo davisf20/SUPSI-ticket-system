@@ -8,7 +8,7 @@ The service allows you to view, create, edit and delete tickets. The various req
 
 Used to get a Ticket or all Tickets.
 
-**URL** : `/api/tickets/*`
+**URL** : `/api/tickets/<id>`
 
 **Method** : `GET`
 
@@ -71,7 +71,7 @@ Used to create a new Ticket.
 
 ## Success Response
 
-**Code** : `200 OK`
+**Code** : `201 CREATED`
 
 **Content example**
 
@@ -88,7 +88,13 @@ Used to create a new Ticket.
 
 **Condition** : If the type of the request is not json.
 
-**Code** : `400 Invalid content type`
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```PrettyPrint
+Invalid content type
+```
 
 
 
@@ -96,7 +102,7 @@ Used to create a new Ticket.
 
 Used to modify an existing Ticket.
 
-**URL** : `/api/tickets/*`
+**URL** : `/api/tickets/<id>`
 
 **Method** : `PUT`
 
@@ -147,33 +153,29 @@ Used to modify an existing Ticket.
 Ticket not found
 ```
 
+**Condition** : If the type of the request is not json.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```PrettyPrint
+Invalid content type
+```
+
 
 
 # Delete Ticket
 
 Used to delete an existing Ticket.
 
-**URL** : `/api/tickets/*`
+**URL** : `/api/tickets/<id>`
 
 **Method** : `DELETE`
 
 ## Success Response
 
-**Code** : `200 OK`
-
-**Content example**
-
-```PrettyPrint
-Ticket deleted
-```
-```json
-{
-      "id": 1,
-      "title": "Ticket 1",
-      "description": "Description of the ticket 1",
-      "author": "Pippo"
-}
-```
+**Code** : `204 NO CONTENT`
 
 ## Error Response
 
@@ -187,13 +189,23 @@ Ticket deleted
 Ticket not found
 ```
 
+**Condition** : If the type of the request is not json.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```PrettyPrint
+Invalid content type
+```
+
 
 
 # Patch Ticket
 
 Used to modify a part of an existing Ticket.
 
-**URL** : `/api/tickets/*`
+**URL** : `/api/tickets/<id>`
 
 **Method** : `PATCH`
 
@@ -238,4 +250,14 @@ Used to modify a part of an existing Ticket.
 
 ```PrettyPrint
 Ticket not found
+```
+
+**Condition** : If the type of the request is not json.
+
+**Code** : `400 Bad Request`
+
+**Content** :
+
+```PrettyPrint
+Invalid content type
 ```
