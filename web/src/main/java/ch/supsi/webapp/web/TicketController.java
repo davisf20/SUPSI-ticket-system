@@ -15,7 +15,7 @@ public class TicketController {
     @RequestMapping(value = "/tickets", method = RequestMethod.POST)
     public ResponseEntity<Ticket> post(@RequestBody Ticket ticket) {
         tickets.add(ticket);
-        return new ResponseEntity<Ticket>(ticket, HttpStatus.CREATED);
+        return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/tickets", method= RequestMethod.GET)
@@ -27,9 +27,9 @@ public class TicketController {
     public ResponseEntity<Ticket> get(@PathVariable int id) {
         Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
         if (ticket != null) {
-            return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
+            return new ResponseEntity<>(ticket, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -40,9 +40,9 @@ public class TicketController {
             ticket.setTitle(newTicket.getTitle());
             ticket.setDescription(newTicket.getDescription());
             ticket.setAuthor(newTicket.getAuthor());
-            return new ResponseEntity<Ticket>(ticket, HttpStatus.OK);
+            return new ResponseEntity<>(ticket, HttpStatus.OK);
         } else {
-            return new ResponseEntity<Ticket>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -51,7 +51,7 @@ public class TicketController {
         Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
         if (ticket != null) {
             tickets.remove(ticket);
-            return new ResponseEntity<Map<String, Object>>(Map.of("success", true), HttpStatus.OK);
+            return new ResponseEntity<>(Map.of("success", true), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
