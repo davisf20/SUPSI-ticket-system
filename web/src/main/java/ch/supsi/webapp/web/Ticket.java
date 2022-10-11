@@ -1,4 +1,4 @@
-package ch.supsi.webapp;
+package ch.supsi.webapp.web;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
