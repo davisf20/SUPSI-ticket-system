@@ -1,56 +1,58 @@
-package ch.supsi.webapp.web;
+package ch.supsi.webapp.web.controller;
 
+import ch.supsi.webapp.web.Ticket;
+import ch.supsi.webapp.web.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class TicketController {
-    private final List<Ticket> tickets = new ArrayList<>();
+    @Autowired
+    private TicketService ticketService;
 
-    @RequestMapping(value = "/tickets", method = RequestMethod.POST)
+    @PostMapping(value = "/tickets")
     public ResponseEntity<Ticket> post(@RequestBody Ticket ticket) {
-        tickets.add(ticket);
+        ticketService.save(ticket);
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/tickets", method= RequestMethod.GET)
+    @GetMapping(value="/tickets")
     public List<Ticket> get() {
-        return tickets;
+        return ticketService.getAll();
     }
 
-    @RequestMapping(value="/tickets/{id}", method= RequestMethod.GET)
+    @GetMapping(value="/tickets/{id}")
     public ResponseEntity<Ticket> get(@PathVariable int id) {
-        Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-        if (ticket != null) {
-            return new ResponseEntity<>(ticket, HttpStatus.OK);
+        if (ticketService.exists(id)) {
+            return new ResponseEntity<>(ticketService.get(id), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value="/tickets/{id}", method= RequestMethod.PUT)
+    @PutMapping(value="/tickets/{id}")
     public ResponseEntity<Ticket> put(@PathVariable int id, @RequestBody Ticket newTicket) {
-        Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-        if (ticket != null) {
+        if (ticketService.exists(id)) {
+            Ticket ticket = ticketService.get(id);
             ticket.setTitle(newTicket.getTitle());
             ticket.setDescription(newTicket.getDescription());
             ticket.setAuthor(newTicket.getAuthor());
+            ticketService.save(ticket);
             return new ResponseEntity<>(ticket, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(value="/tickets/{id}", method= RequestMethod.DELETE)
+    @DeleteMapping(value="/tickets/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable int id) {
-        Ticket ticket = tickets.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
-        if (ticket != null) {
-            tickets.remove(ticket);
+        if (ticketService.exists(id)) {
+            ticketService.delete(id);
             return new ResponseEntity<>(Map.of("success", true), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
