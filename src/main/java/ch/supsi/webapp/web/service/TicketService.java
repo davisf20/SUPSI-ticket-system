@@ -1,6 +1,6 @@
 package ch.supsi.webapp.web.service;
 
-import ch.supsi.webapp.web.Ticket;
+import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

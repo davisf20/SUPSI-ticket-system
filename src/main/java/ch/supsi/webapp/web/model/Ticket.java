@@ -1,4 +1,4 @@
-package ch.supsi.webapp.web;
+package ch.supsi.webapp.web.model;
 
 import lombok.*;
 
@@ -6,6 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+enum STATUS {
+    OPEN,
+    IN_PROGRESS,
+    DONE,
+    CLOSED
+}
 
 @Entity
 @Data
@@ -26,4 +33,7 @@ public class Ticket {
 
     @Column
     private String author;
+
+    @Column
+    private STATUS status;
 }

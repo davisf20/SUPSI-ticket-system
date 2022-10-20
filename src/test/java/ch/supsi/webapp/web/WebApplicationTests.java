@@ -1,5 +1,6 @@
 package ch.supsi.webapp.web;
 
+import ch.supsi.webapp.web.model.Ticket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.MethodOrderer;

@@ -1,6 +1,6 @@
 package ch.supsi.webapp.web.controller;
 
-import ch.supsi.webapp.web.Ticket;
+import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,6 +42,7 @@ public class TicketController {
             ticket.setTitle(newTicket.getTitle());
             ticket.setDescription(newTicket.getDescription());
             ticket.setAuthor(newTicket.getAuthor());
+            ticket.setStatus(newTicket.getStatus());
             ticketService.save(ticket);
             return new ResponseEntity<>(ticket, HttpStatus.OK);
         } else {
