@@ -2,10 +2,7 @@ package ch.supsi.webapp.web.model;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 enum STATUS {
     OPEN,
@@ -31,8 +28,9 @@ public class Ticket {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column
-    private String author;
+    @ManyToOne
+    @JoinColumn(name = "fk_user")
+    private User user;
 
     @Column
     private STATUS status;

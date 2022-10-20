@@ -41,7 +41,7 @@ public class TicketController {
             Ticket ticket = ticketService.get(id);
             ticket.setTitle(newTicket.getTitle());
             ticket.setDescription(newTicket.getDescription());
-            ticket.setAuthor(newTicket.getAuthor());
+            ticket.setUser(newTicket.getUser());
             ticket.setStatus(newTicket.getStatus());
             ticketService.save(ticket);
             return new ResponseEntity<>(ticket, HttpStatus.OK);
