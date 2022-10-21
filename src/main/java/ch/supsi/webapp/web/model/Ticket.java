@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
+
 enum STATUS {
     OPEN,
     IN_PROGRESS,
@@ -33,5 +34,6 @@ public class Ticket {
     private User user;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private STATUS status;
 }
