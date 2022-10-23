@@ -1,12 +1,15 @@
 package ch.supsi.webapp.web.controller;
 
+import ch.supsi.webapp.web.model.Status;
 import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.service.TicketService;
+import ch.supsi.webapp.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +17,21 @@ import java.util.Map;
 public class TicketController {
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping(value = "/tickets")
     public ResponseEntity<Ticket> post(@RequestBody Ticket ticket) {
+        if (ticket.getTitle() == null || ticket.getDescription() == null || ticket.getUser() == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        if (userService.exists(ticket.getUser().getId()))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        ticket.setStatus(Status.OPEN);
+        ticket.setCreationDate(LocalDateTime.now());
         ticketService.save(ticket);
+        ticket.setUser(userService.get(ticket.getUser().getId()));
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
 
@@ -37,6 +51,9 @@ public class TicketController {
 
     @PutMapping(value="/tickets/{id}")
     public ResponseEntity<Ticket> put(@PathVariable int id, @RequestBody Ticket newTicket) {
+        if (newTicket.getTitle() == null || newTicket.getDescription() == null || newTicket.getUser() == null || newTicket.getStatus() == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         if (ticketService.exists(id)) {
             Ticket ticket = ticketService.get(id);
             ticket.setTitle(newTicket.getTitle());

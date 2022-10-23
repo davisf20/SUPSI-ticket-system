@@ -3,19 +3,11 @@ package ch.supsi.webapp.web.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
-
-enum STATUS {
-    OPEN,
-    IN_PROGRESS,
-    DONE,
-    CLOSED
-}
 
 @Entity
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ticket {
@@ -35,5 +27,8 @@ public class Ticket {
 
     @Column
     @Enumerated(EnumType.STRING)
-    private STATUS status;
+    private Status status;
+
+    @Column
+    private LocalDateTime creationDate;
 }

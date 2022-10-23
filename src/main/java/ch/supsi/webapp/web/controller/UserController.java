@@ -17,6 +17,9 @@ public class UserController {
 
     @PostMapping(value = "/users")
     public ResponseEntity<User> post(@RequestBody User user) {
+        if (user.getFirstName() == null || user.getLastName() == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
@@ -37,11 +40,13 @@ public class UserController {
 
     @PutMapping(value="/users/{id}")
     public ResponseEntity<User> put(@PathVariable int id, @RequestBody User newUser) {
+if (newUser.getFirstName() == null || newUser.getLastName() == null)
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         if (userService.exists(id)) {
             User user = userService.get(id);
             user.setFirstName(newUser.getFirstName());
             user.setLastName(newUser.getLastName());
-            user.setTickets(newUser.getTickets());
             userService.save(user);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
