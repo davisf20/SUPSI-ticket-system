@@ -40,7 +40,7 @@ public class UserController {
 
     @PutMapping(value="/users/{id}")
     public ResponseEntity<User> put(@PathVariable int id, @RequestBody User newUser) {
-if (newUser.getFirstName() == null || newUser.getLastName() == null)
+        if (newUser.getFirstName() == null || newUser.getLastName() == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if (userService.exists(id)) {

@@ -22,10 +22,10 @@ public class TicketController {
 
     @PostMapping(value = "/tickets")
     public ResponseEntity<Ticket> post(@RequestBody Ticket ticket) {
-        if (ticket.getTitle() == null || ticket.getDescription() == null || ticket.getUser() == null)
+        if (ticket.getTitle() == null || ticket.getDescription() == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        if (userService.exists(ticket.getUser().getId()))
+        if (!userService.exists(ticket.getUser().getId()))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         ticket.setStatus(Status.OPEN);

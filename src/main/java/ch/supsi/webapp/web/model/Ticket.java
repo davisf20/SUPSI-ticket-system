@@ -1,5 +1,6 @@
 package ch.supsi.webapp.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
+    @JsonIgnoreProperties("tickets")
     private User user;
 
     @Column
