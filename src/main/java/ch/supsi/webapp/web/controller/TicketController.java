@@ -56,6 +56,9 @@ public class TicketController {
         if (newTicket.getTitle() == null || newTicket.getDescription() == null || newTicket.getUser() == null || newTicket.getStatus() == null)
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
+        if (!userService.exists(newTicket.getUser().getId()))
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
         if (ticketService.exists(id)) {
             Ticket ticket = ticketService.get(id);
             ticket.setTitle(newTicket.getTitle());
