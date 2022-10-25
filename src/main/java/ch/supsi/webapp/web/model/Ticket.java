@@ -27,8 +27,9 @@ public class Ticket {
     @JsonIgnoreProperties("tickets")
     private User user;
 
-    @Column
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "fk_status")
+    @JsonIgnoreProperties("tickets")
     private Status status;
 
     @Column
