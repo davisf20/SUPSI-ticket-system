@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,6 @@ public class Status {
     private String name;
 
     @OneToMany(mappedBy = "status")
+    @JsonIgnoreProperties("status")
     private List<Ticket> tickets;
 }
