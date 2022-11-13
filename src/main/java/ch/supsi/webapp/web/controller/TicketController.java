@@ -57,6 +57,8 @@ public class TicketController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if (!userService.exists(newTicket.getUser().getId()))
+
+
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         if (ticketService.exists(id)) {
