@@ -91,39 +91,67 @@ h2 {
 
 section {
     padding-left:64px!important;
+    padding-right:64px!important;
     float:left;
     width:100%;
 }
 
 article {
+    width: 100%;
+    padding: 10px;
+    background-color: #f4f7f8;
+    color: #1b9ba3;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding-top:64px!important;
     padding-bottom:64px!important;
+}
+
+article > * {
+    align-self: center;
 }
 
 h3 {
     color:#009688!important;
 }
 
+/* aside on the right of the page */
 aside {
     float: right;
     height:100%;
-    width:20%;
-    position:fixed!important;
-    z-index:1;
+    width: 20%;
     padding:8px 16px;
-    overflow:auto;
-    display:none!important;
-    text-align:left;
-    font-size:18px!important;
-    color:#000 !important;
-    background-color:#f0f0f0 !important;
+    background-color: #f0f0f0!important;
+    color: #000!important;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     border-left: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    font-size:18px!important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align:left;
+    padding-top:64px!important;
+    padding-bottom:64px!important;
 }
 
 footer {
     padding:0.01em 16px;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     color:#fff !important;
     background-color:#333333 !important;
+}
+
+* {
+    box-sizing: border-box;
 }

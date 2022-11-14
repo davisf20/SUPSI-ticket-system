@@ -81,7 +81,16 @@ section {
 
 footer {
     padding:0.01em 16px;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     color:#fff !important;
     background-color:#333333 !important;
+}
+
+* {
+    box-sizing: border-box;
 }
