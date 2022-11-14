@@ -35,7 +35,7 @@ nav {
 }
 
 .nav-link:hover {
-    color:#000!important;
+    color:#333333!important;
     background-color:#ccc!important;
     text-decoration: none;
 }
@@ -52,7 +52,7 @@ nav {
 }
 
 .nav-link-selected {
-    color:#fff !important;
+    color:#333333!important;
     background-color:#ccc !important;
     text-align:left!important;
     font-size:18px!important;
@@ -71,12 +71,19 @@ header {
 }
 
 section {
-    padding: 10px;
-    text-align: center;
     font-size: 20px;
-    background-color: #f4f7f8;
-    color: #1b9ba3;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+    background: #f4f7f8;
+    padding: 20px 20px 20px 20px;
+    max-width: 600px;
+    margin: 10px auto 64px auto;
+    border-radius: 8px;
+    box-shadow: 0 0 40px -10px #000;
+}
+
+h2 {
+    text-align: center;
 }
 
 footer {
