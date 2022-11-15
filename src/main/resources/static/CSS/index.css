@@ -93,7 +93,7 @@ section {
     padding-left:64px!important;
     padding-right:64px!important;
     float:left;
-    width:100%;
+    flex: 1;
 }
 
 article {
@@ -129,25 +129,27 @@ h3 {
     color:#009688!important;
 }
 
-/* aside on the right of the page */
 aside {
-    float: right;
     height:100%;
-    width: 20%;
+    width: 15%;
     padding:8px 16px;
     background-color: #f0f0f0!important;
     color: #000!important;
-    margin: 10px;
-    border-radius: 10px;
+    margin: 10px 0 10px 10px;
+    border-radius: 10px 0 0 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     border-left: 1px solid #ccc;
     font-size:18px!important;
-    display: flex;
+    display: inline;
     flex-wrap: wrap;
     justify-content: space-between;
     text-align:left;
     padding-top:64px!important;
     padding-bottom:64px!important;
+}
+
+aside > p {
+    margin-left: 40px;
 }
 
 footer {
