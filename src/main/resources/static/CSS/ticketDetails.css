@@ -82,8 +82,37 @@ section {
     box-shadow: 0 0 40px -10px #000;
 }
 
+/* TODO: set div content in article one line */
+article > div {
+
+}
+
 h2 {
     text-align: center;
+}
+
+#edit {
+    background-color: #aaaaaa;
+    border: 0;
+    width: 20%;
+    padding: 10px 15px;
+    color: #fff;
+    margin: 20px 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 40px -10px #333;
+}
+
+#delete {
+    background-color: #ff0000;
+    border: 0;
+    width: 20%;
+    padding: 10px 15px;
+    color: #fff;
+    margin: 20px 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 0 40px -10px #333;
 }
 
 footer {

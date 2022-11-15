@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ticket service project">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Davis Fusco">
+    <link rel="stylesheet" type="text/css" th:href="@{'../CSS/ticketDetails.css'}">
+    <title>Ticket Details</title>
+</head>
+<body>
+<header>
+    <h1>Ticket Details</h1>
+</header>
+<nav>
+    <img th:src="@{'../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <a th:href="@{'/'}" class="nav-link">Home</a>
+    <a th:href="@{'/ticket/new'}" class="nav-link">Create a Ticket</a>
+</nav>
+<main>
+    <section>
+        <article>
+            <h2 th:text="${ticket.title}">Ticket 1</h2>
+            <div>
+                <b>Author:</b>
+                <p th:if="${ticket.user} != null" th:text="${ticket.user.getFirstName()} + ' ' + ${ticket.user.getLastName()}">Pippo</p>
+            </div>
+            <div>
+                <b>Type:</b>
+                <p>Task</p>
+            </div>
+            <div>
+                <b>Date:</b>
+                <time datetime="2022-10-25T01:00-02:00" th:text="${ticket.creationDate}">2022-10-25 14:54:39</time>
+            </div>
+            <div>
+                <b>Status:</b>
+                <p th:text="${ticket.status.getName()}">Open</p>
+            </div>
+            <div>
+                <b>Description:</b>
+                <p th:text="${ticket.description}">This is the description of the Ticket 1.</p>
+            </div>
+            <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">
+                <input id="edit" type="submit" value="Edit">
+            </form>
+            <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">
+                <input id="delete" type="submit" value="Delete">
+            </form>
+        </article>
+    </section>
+</main>
+<footer>
+    <p><small>Copyleft CC-by 2022 by Davis</small></p>
+</footer>
+</body>
+</html>

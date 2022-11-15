@@ -19,6 +19,9 @@ public class Ticket {
     @Column
     private String title;
 
+    @Column
+    private Type type;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -27,9 +30,7 @@ public class Ticket {
     @JsonIgnoreProperties("tickets")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_status")
-    @JsonIgnoreProperties("tickets")
+    @Column
     private Status status;
 
     @Column

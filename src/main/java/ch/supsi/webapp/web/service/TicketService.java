@@ -1,10 +1,12 @@
 package ch.supsi.webapp.web.service;
 
+import ch.supsi.webapp.web.model.Status;
 import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,6 +15,8 @@ public class TicketService {
     private TicketRepository ticketRepository;
 
     public void save(Ticket ticket) {
+        ticket.setStatus(Status.OPEN);
+        ticket.setCreationDate(LocalDateTime.now());
         ticketRepository.save(ticket);
     }
 

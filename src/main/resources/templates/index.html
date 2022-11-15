@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ticket service project">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Davis Fusco">
+    <link rel="stylesheet" type="text/css" th:href="@{'CSS/index.css'}">
+    <title>Ticket Service Home</title>
+</head>
+<body>
+<header>
+    <h1>Ticket Service Home</h1>
+</header>
+<nav>
+    <img th:src="@{'images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <a href="#" class="nav-link nav-link-selected">Home</a>
+    <a th:href="@{'/ticket/new'}" class="nav-link">Create a Ticket</a>
+</nav>
+<main>
+    <section>
+        <h2>Tickets</h2>
+        <article th:each="ticket : ${tickets}">
+            <h3 th:text="${ticket.title}">Ticket 1</h3>
+            <time datetime="2022-10-25T01:00-02:00" th:text="${ticket.creationDate}">2022-10-25 14:54:39</time>
+            <p th:if="${ticket.status} != null" th:text="${ticket.status.getName()}">OPEN</p>
+            <p th:text="${ticket.description}">This is the description...</p>
+            <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+        </article>
+    </section>
+    <aside>
+        <h2>Info</h2>
+        <p>Info</p>
+    </aside>
+</main>
+<footer>
+    <p><small>Copyleft CC-by 2022 by Davis</small></p>
+</footer>
+</body>
+</html>

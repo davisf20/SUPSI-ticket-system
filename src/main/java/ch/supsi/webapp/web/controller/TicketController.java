@@ -1,7 +1,6 @@
 package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.model.Ticket;
-import ch.supsi.webapp.web.service.StatusService;
 import ch.supsi.webapp.web.service.TicketService;
 import ch.supsi.webapp.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -19,8 +17,6 @@ public class TicketController {
     private TicketService ticketService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private StatusService statusService;
 
     @PostMapping(value = "/tickets")
     public ResponseEntity<Ticket> post(@RequestBody Ticket ticket) {
@@ -30,8 +26,8 @@ public class TicketController {
         if (!userService.exists(ticket.getUser().getId()))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        ticket.setStatus(statusService.get(1));
-        ticket.setCreationDate(LocalDateTime.now());
+        //ticket.setStatus(statusService.get(1));
+        //ticket.setCreationDate(LocalDateTime.now());
         ticketService.save(ticket);
         ticket.setUser(userService.get(ticket.getUser().getId()));
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);

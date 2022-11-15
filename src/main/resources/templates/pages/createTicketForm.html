@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ticket service project">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Davis Fusco">
+    <link rel="stylesheet" type="text/css" th:href="@{'../CSS/ticketForm.css'}">
+    <title>Create a new Ticket</title>
+</head>
+<body>
+<header>
+    <h1>Create a new Ticket</h1>
+</header>
+<nav>
+    <img th:src="@{'../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <a th:href="@{'/'}" class="nav-link">Home</a>
+    <a href="#" class="nav-link nav-link-selected">Create a Ticket</a>
+</nav>
+<main>
+    <section>
+        <form action="#" th:action="@{/ticket/new}" th:object="${ticket}" method="post">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" th:field="*{title}" required placeholder="Title">
+            <br>
+            <label for="author">Author:</label> <!-- TODO: fix author, passing by id -->
+            <input type="text" id="author" name="author" th:field="*{user}" required placeholder="Author">
+            <br> <!-- TODO: set type value -->
+            <!--<label for="type">Type:</label>
+            <select id="type" name="type">
+                <option value="task">Task</option>
+                <option value="story">Story</option>
+                <option value="issue">Issue</option>
+                <option value="bug">Bug</option>
+                <option value="investigation">Investigation</option>
+            </select>-->
+            <br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" th:field="*{description}" placeholder="Description"></textarea>
+            <br>
+            <input type="submit" value="Create ticket">
+        </form>
+    </section>
+</main>
+<footer>
+    <p><small>Copyleft CC-by 2022 by Davis</small></p>
+</footer>
+</body>
+</html>
