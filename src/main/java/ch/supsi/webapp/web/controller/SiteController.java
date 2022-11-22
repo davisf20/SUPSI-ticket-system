@@ -54,6 +54,8 @@ public class SiteController {
     @GetMapping("/ticket/{id}/edit")
     public String getEditForm(@PathVariable int id, Model model) {
         model.addAttribute("ticket", ticketService.get(id));
+        model.addAttribute("typeList", typeService.getAll());
+        model.addAttribute("statusList", statusService.getAll());
         return "pages/editTicketForm";
     }
 

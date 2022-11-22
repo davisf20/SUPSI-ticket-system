@@ -5,7 +5,7 @@
     <meta name="description" content="Ticket service project">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
-    <link rel="stylesheet" type="text/css" th:href="@{'../CSS/ticketForm.css'}">
+    <link rel="stylesheet" type="text/css" th:href="@{'../../CSS/ticketForm.css'}">
     <title>Edit Ticket</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <h1>Edit Ticket</h1>
 </header>
 <nav>
-    <img th:src="@{'../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <img th:src="@{'../../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a th:href="@{'/'}" class="nav-link">Home</a>
     <a href="#" class="nav-link nav-link-selected">Create a Ticket</a>
 </nav>
@@ -28,27 +28,16 @@
             <br>
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" th:value="*{creationDate}" readonly>
-            <select th:field="*{type}">
-                <option th:each="type : ${allTypes}"
-                        th:value="${type}"
-                        th:text="#{${'seedstarter.type.' + type}}">Wireframe</option>
-            </select>
-            <!--<label for="type">Type:</label>
+            <br>
+            <label for="type">Type:</label>
             <select id="type" name="type" th:field="*{type}">
-                <option th:value="'TASK'" th:text="Task"></option>
-                <option th:value="'STORY'" th:text="Story"></option>
-                <option th:value="'ISSUE'" th:text="Issue"></option>
-                <option th:value="'BUG'" th:text="Bug"></option>
-                <option th:value="'INVESTIGATION'" th:text="Investigation"></option>
+                <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
             </select>
             <br>
             <label for="status">Status:</label>
             <select id="status" name="status" th:field="*{status}">
-                <option th:value="'OPEN'" th:text="Open"></option>
-                <option th:value="'IN_PROGRESS'" th:text="In progress"></option>
-                <option th:value="'DONE'" th:text="Done"></option>
-                <option th:value="'CLOSED'" th:text="Closed"></option>
-            </select>-->
+                <option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
+            </select>
             <br>
             <label for="description">Description:</label>
             <textarea id="description" name="description" th:value="*{description}" th:field="*{description}" placeholder="Description"></textarea>
