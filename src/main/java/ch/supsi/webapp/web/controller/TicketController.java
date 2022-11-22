@@ -28,7 +28,7 @@ public class TicketController {
 
         //ticket.setStatus(statusService.get(1));
         //ticket.setCreationDate(LocalDateTime.now());
-        ticketService.save(ticket);
+        ticketService.create(ticket);
         ticket.setUser(userService.get(ticket.getUser().getId()));
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
@@ -63,7 +63,7 @@ public class TicketController {
             ticket.setDescription(newTicket.getDescription());
             ticket.setUser(newTicket.getUser());
             ticket.setStatus(newTicket.getStatus());
-            ticketService.save(ticket);
+            ticketService.update(ticket);
             return new ResponseEntity<>(ticket, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

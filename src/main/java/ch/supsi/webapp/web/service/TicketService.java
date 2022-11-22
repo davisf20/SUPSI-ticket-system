@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.service;
 
 import ch.supsi.webapp.web.model.Ticket;
+import ch.supsi.webapp.web.repository.StatusRepository;
 import ch.supsi.webapp.web.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,24 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
     @Autowired
-    private StatusService statusService;
+    private StatusRepository statusRepository;
 
-    public void save(Ticket ticket) {
-        ticket.setStatus(statusService.get(1));
-        ticket.setCreationDate(LocalDateTime.now());
+    private void save(Ticket ticket) {
         ticketRepository.save(ticket);
+    }
+
+    public void create(Ticket ticket) {
+        if (!exists(ticket.getId()) && statusRepository.existsById(1)) {
+            ticket.setStatus(statusRepository.findById(1).orElse(null));
+            ticket.setCreationDate(LocalDateTime.now());
+            save(ticket);
+        }
+    }
+
+    public void update(Ticket ticket) {
+        if (exists(ticket.getId())) {
+            save(ticket);
+        }
     }
 
     public List<Ticket> getAll() {

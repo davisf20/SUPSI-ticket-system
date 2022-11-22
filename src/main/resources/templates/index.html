@@ -30,7 +30,21 @@
     </section>
     <aside>
         <h2>Info</h2>
-        <p>Info</p>
+        <div>
+            Opened tickets: <p th:text="${numberOpenTickets}"></p>
+        </div>
+        <div>
+            In progress tickets: <p th:text="${numberInProgressTickets}"></p>
+        </div>
+        <div>
+            Done tickets: <p th:text="${numberDoneTickets}"></p>
+        </div>
+        <div>
+            Closed tickets: <p th:text="${numberClosedTickets}"></p>
+        </div>
+        <div>
+            Total tickets: <p th:text="${numberTickets}"></p>
+        </div>
     </aside>
 </main>
 <footer>
