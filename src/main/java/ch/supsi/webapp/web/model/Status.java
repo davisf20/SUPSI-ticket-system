@@ -1,15 +1,25 @@
 package ch.supsi.webapp.web.model;
 
-public enum Status {
-    OPEN("Open"), IN_PROGRESS("In progress"), DONE("Done"), CLOSED("Closed");
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
-    private final String name;
+import javax.persistence.*;
+import java.util.List;
 
-    Status(String name) {
-        this.name = name;
-    }
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Status {
+    @Id
+    @GeneratedValue
+    private int id;
 
-    public String getName() {
-        return name;
-    }
+    @Column
+    private String name;
+
+    @OneToMany(mappedBy = "status")
+    @JsonIgnoreProperties("tickets")
+    private List<Ticket> tickets;
 }

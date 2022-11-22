@@ -25,15 +25,10 @@
             <br>
             <label for="author">Author:</label> <!-- TODO: fix author, passing by id -->
             <input type="text" id="author" name="author" th:field="*{user}" required placeholder="Author">
-            <br> <!-- TODO: set type value -->
-            <!--<label for="type">Type:</label>
-            <select id="type" name="type">
-                <option value="task">Task</option>
-                <option value="story">Story</option>
-                <option value="issue">Issue</option>
-                <option value="bug">Bug</option>
-                <option value="investigation">Investigation</option>
-            </select>-->
+            <label for="type">Type:</label>
+            <select id="type" name="type" th:field="*{type}">
+                <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
+            </select>
             <br>
             <label for="description">Description:</label>
             <textarea id="description" name="description" th:field="*{description}" placeholder="Description"></textarea>

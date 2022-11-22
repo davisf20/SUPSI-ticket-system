@@ -1,15 +1,25 @@
 package ch.supsi.webapp.web.model;
 
-public enum Type {
-    TASK("Task"), STORY("Story"), ISSUE("Issue"), BUG("Bug"), INVESTIGATION("Investigation");
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
-    private final String name;
+import javax.persistence.*;
+import java.util.List;
 
-    Type(String name) {
-        this.name = name;
-    }
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Type {
+    @Id
+    @GeneratedValue
+    private int id;
 
-    public String getName() {
-        return name;
-    }
+    @Column
+    private String name;
+
+    @OneToMany(mappedBy = "type")
+    @JsonIgnoreProperties("tickets")
+    private List<Ticket> tickets;
 }

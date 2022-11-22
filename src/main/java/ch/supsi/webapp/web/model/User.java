@@ -1,12 +1,14 @@
 package ch.supsi.webapp.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -21,5 +23,6 @@ public class User {
     private String lastName;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("tickets")
     private List<Ticket> tickets;
 }

@@ -1,7 +1,9 @@
 package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.model.Ticket;
+import ch.supsi.webapp.web.service.StatusService;
 import ch.supsi.webapp.web.service.TicketService;
+import ch.supsi.webapp.web.service.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SiteController {
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private TypeService typeService;
+    @Autowired
+    private StatusService statusService;
 
     // return the list of tickets
     @GetMapping("/")
@@ -32,6 +38,7 @@ public class SiteController {
     @GetMapping("/ticket/new")
     public String getForm(Model model) {
         model.addAttribute("ticket", new Ticket());
+        model.addAttribute("typeList", typeService.getAll());
         return "pages/createTicketForm";
     }
 

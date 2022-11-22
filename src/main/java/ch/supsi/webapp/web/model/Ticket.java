@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ticket {
@@ -19,7 +20,9 @@ public class Ticket {
     @Column
     private String title;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "fk_type")
+    @JsonIgnoreProperties("type")
     private Type type;
 
     @Column(columnDefinition = "TEXT")
@@ -27,10 +30,12 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "fk_user")
-    @JsonIgnoreProperties("tickets")
+    @JsonIgnoreProperties("user")
     private User user;
 
-    @Column
+    @ManyToOne
+    @JoinColumn(name = "fk_status")
+    @JsonIgnoreProperties("status")
     private Status status;
 
     @Column
