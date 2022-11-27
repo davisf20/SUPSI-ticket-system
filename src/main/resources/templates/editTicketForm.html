@@ -5,37 +5,43 @@
     <meta name="description" content="Ticket service project">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
-    <link rel="stylesheet" type="text/css" th:href="@{'../CSS/ticketForm.css'}">
-    <title>Create a new Ticket</title>
+    <link rel="stylesheet" type="text/css" href="../static/CSS/index.css" th:href="@{'/CSS/ticketForm.css'}">
+    <title>Edit Ticket</title>
 </head>
 <body>
 <header>
-    <h1>Create a new Ticket</h1>
+    <h1>Edit Ticket</h1>
 </header>
 <nav>
-    <img th:src="@{'../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a th:href="@{'/'}" class="nav-link">Home</a>
     <a href="#" class="nav-link nav-link-selected">Create a Ticket</a>
 </nav>
 <main>
     <section>
-        <form action="#" th:action="@{/ticket/new}" th:object="${ticket}" method="post">
+        <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="post">
             <label for="title">Title:</label>
-            <input type="text" id="title" name="title" th:field="*{title}" required placeholder="Title">
+            <input type="text" id="title" name="title" th:value="*{title}" th:field="*{title}" required placeholder="Title">
             <br>
             <label for="user">Author:</label>
             <select id="user" name="user" th:field="*{user}">
                 <option th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
             </select>
+            <br>
             <label for="type">Type:</label>
             <select id="type" name="type" th:field="*{type}">
                 <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
             </select>
             <br>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" th:field="*{description}" placeholder="Description"></textarea>
+            <label for="status">Status:</label>
+            <select id="status" name="status" th:field="*{status}">
+                <option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
+            </select>
             <br>
-            <input type="submit" value="Create ticket">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" th:value="*{description}" th:field="*{description}" placeholder="Description"></textarea>
+            <br>
+            <input type="submit" value="Save ticket">
         </form>
     </section>
 </main>

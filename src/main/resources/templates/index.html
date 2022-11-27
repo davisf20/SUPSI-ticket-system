@@ -5,7 +5,7 @@
     <meta name="description" content="Ticket service project">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
-    <link rel="stylesheet" type="text/css" th:href="@{'CSS/index.css'}">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/index.css" th:href="@{'/CSS/index.css'}">
     <title>Ticket Service Home</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <h1>Ticket Service Home</h1>
 </header>
 <nav>
-    <img th:src="@{'images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a href="#" class="nav-link nav-link-selected">Home</a>
     <a th:href="@{'/ticket/new'}" class="nav-link">Create a Ticket</a>
 </nav>
@@ -22,29 +22,19 @@
         <h2>Tickets</h2>
         <article th:each="ticket : ${tickets}">
             <h3 th:text="${ticket.title}">Ticket 1</h3>
-            <time datetime="2022-10-25T01:00-02:00" th:text="${ticket.creationDate}">2022-10-25 14:54:39</time>
-            <p th:if="${ticket.status} != null" th:text="${ticket.status.getName()}">OPEN</p>
-            <p th:text="${ticket.description}">This is the description...</p>
+            <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+            <p th:text="${ticket.status.getName()}">OPEN</p>
+            <p th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
             <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
         </article>
     </section>
     <aside>
         <h2>Info</h2>
-        <div>
-            Opened tickets: <p th:text="${numberOpenTickets}"></p>
-        </div>
-        <div>
-            In progress tickets: <p th:text="${numberInProgressTickets}"></p>
-        </div>
-        <div>
-            Done tickets: <p th:text="${numberDoneTickets}"></p>
-        </div>
-        <div>
-            Closed tickets: <p th:text="${numberClosedTickets}"></p>
-        </div>
-        <div>
-            Total tickets: <p th:text="${numberTickets}"></p>
-        </div>
+        <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
+        <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
+        <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
+        <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
+        <p th:text="'Total tickets: ' + ${numberTickets}"></p>
     </aside>
 </main>
 <footer>

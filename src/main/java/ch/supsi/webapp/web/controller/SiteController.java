@@ -39,7 +39,7 @@ public class SiteController {
     @GetMapping("/ticket/{id}")
     public String getTicket(@PathVariable int id, Model model) {
         model.addAttribute("ticket", ticketService.get(id));
-        return "pages/ticketDetails";
+        return "ticketDetails";
     }
 
     // return the form to create a new ticket
@@ -48,14 +48,13 @@ public class SiteController {
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("userList", userService.getAll());
         model.addAttribute("typeList", typeService.getAll());
-        return "pages/createTicketForm";
+        return "createTicketForm";
     }
 
     // create a new ticket
     @PostMapping("/ticket/new")
     public String newTicket(Ticket ticket, Model model) {
         ticketService.create(ticket);
-        model.addAttribute("ticket", ticketService.get(ticket.getId()));
         return "redirect:/";
     }
 
@@ -66,7 +65,7 @@ public class SiteController {
         model.addAttribute("userList", userService.getAll());
         model.addAttribute("typeList", typeService.getAll());
         model.addAttribute("statusList", statusService.getAll());
-        return "pages/editTicketForm";
+        return "editTicketForm";
     }
 
     // edit the ticket with the given id
@@ -80,7 +79,7 @@ public class SiteController {
         t.setDescription(ticket.getDescription());
         ticketService.update(t);
         model.addAttribute("ticket", ticketService.get(id));
-        return "redirect:/";
+        return "ticketDetails";
     }
 
     // delete the ticket with the given id

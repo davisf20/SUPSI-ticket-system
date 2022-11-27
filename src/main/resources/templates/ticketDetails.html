@@ -5,7 +5,7 @@
     <meta name="description" content="Ticket service project">
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
-    <link rel="stylesheet" type="text/css" th:href="@{'../CSS/ticketDetails.css'}">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/ticketDetails.css" th:href="@{'/CSS/ticketDetails.css'}">
     <title>Ticket Details</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <h1>Ticket Details</h1>
 </header>
 <nav>
-    <img th:src="@{'../images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
+    <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a th:href="@{'/'}" class="nav-link">Home</a>
     <a th:href="@{'/ticket/new'}" class="nav-link">Create a Ticket</a>
 </nav>
@@ -31,7 +31,7 @@
             </div>
             <div>
                 <b>Date:</b>
-                <time datetime="2022-10-25T01:00-02:00" th:text="${ticket.creationDate}">2022-10-25 14:54:39</time>
+                <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
             </div>
             <div>
                 <b>Status:</b>
@@ -41,12 +41,8 @@
                 <b>Description:</b>
                 <p th:text="${ticket.description}">This is the description of the Ticket 1.</p>
             </div>
-            <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">
-                <input id="edit" type="submit" value="Edit">
-            </form>
-            <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">
-                <input id="delete" type="submit" value="Delete">
-            </form>
+            <a th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
+            <a th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
         </article>
     </section>
 </main>
