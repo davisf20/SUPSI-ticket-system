@@ -26,8 +26,6 @@ public class TicketController {
         if (!userService.exists(ticket.getUser().getId()))
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        //ticket.setStatus(statusService.get(1));
-        //ticket.setCreationDate(LocalDateTime.now());
         ticketService.create(ticket);
         ticket.setUser(userService.get(ticket.getUser().getId()));
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);

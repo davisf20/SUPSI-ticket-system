@@ -40,4 +40,8 @@ public class Ticket {
 
     @Column
     private LocalDateTime creationDate;
+
+    @OneToOne
+    @JoinColumn(name = "fk_attachment")
+    private Attachment attachment;
 }
