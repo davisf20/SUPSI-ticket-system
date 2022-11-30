@@ -12,9 +12,7 @@
     <title>Ticket Service Home</title>
 </head>
 <body>
-<header>
-    <h1>Ticket Service Home</h1>
-</header>
+<div th:replace="header :: head"></div>
 <nav>
     <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a href="#" class="nav-link nav-link-selected">Home</a>
@@ -40,8 +38,6 @@
         <p th:text="'Total tickets: ' + ${numberTickets}"></p>
     </aside>
 </main>
-<footer>
-    <p><small>Copyleft CC-by 2022 by Davis</small></p>
-</footer>
+<div th:replace="footer :: copy"></div>
 </body>
 </html>

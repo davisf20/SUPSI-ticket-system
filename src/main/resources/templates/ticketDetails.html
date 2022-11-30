@@ -12,9 +12,7 @@
     <title>Ticket Details</title>
 </head>
 <body>
-<header>
-    <h1>Ticket Details</h1>
-</header>
+<div th:replace="header :: head"></div>
 <nav>
     <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
     <a th:href="@{'/'}" class="nav-link">Home</a>
@@ -49,8 +47,6 @@
         </article>
     </section>
 </main>
-<footer>
-    <p><small>Copyleft CC-by 2022 by Davis</small></p>
-</footer>
+<div th:replace="footer :: copy"></div>
 </body>
 </html>
