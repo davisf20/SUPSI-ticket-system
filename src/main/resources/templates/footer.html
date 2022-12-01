@@ -6,14 +6,13 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
 
-    <link rel="stylesheet" type="text/css" href="../static/CSS/index.css" th:href="@{'/CSS/index.css'}">
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
 
     <title>Footer</title>
 </head>
 <body>
-<footer th:fragment="copy">
-    <p><small>Copyleft CC-by 2022 by Davis</small></p>
+<footer class="d-flex flex-wrap justify-content-center align-items-center py-4 border-top navbar-dark bg-dark" th:fragment="footer">
+    <p class="mb-3 mb-md-0 text-muted"><small>Copyleft CC-by 2022 by Davis Fusco</small></p>
 </footer>
 </body>
 </html>

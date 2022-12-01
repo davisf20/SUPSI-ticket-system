@@ -13,11 +13,7 @@
 </head>
 <body>
 <div th:replace="header :: head"></div>
-<nav>
-    <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66" height="36.96">
-    <a th:href="@{'/'}" class="nav-link">Home</a>
-    <a href="#" class="nav-link nav-link-selected">Create a Ticket</a>
-</nav>
+<div th:replace="navbar :: nav"></div>
 <main>
     <section>
         <form action="#" th:action="@{/ticket/new}" th:object="${ticket}" method="post" enctype="multipart/form-data">
@@ -43,6 +39,6 @@
         </form>
     </section>
 </main>
-<div th:replace="footer :: copy"></div>
+<div th:replace="footer :: footer"></div>
 </body>
 </html>
