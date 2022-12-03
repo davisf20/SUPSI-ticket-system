@@ -19,9 +19,11 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
             <article class="col card shadow-sm p-3 m-3" th:each="ticket : ${tickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
-                <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
-                <p th:text="${ticket.status.getName()}">OPEN</p>
-                <p th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <div class="w-50 text-center bg-success bg-gradient rounded-pill">
+                    <p class="m-0 text-light" th:text="${ticket.status.getName()}">OPEN</p>
+                </div>
+                <p class="mt-3" th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
                 <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
             </article>
         </div>
@@ -29,11 +31,15 @@
     <aside class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark rounded-top">
         <h2 class="d-flex align-items-center flex-shrink-0 p-3 text-light text-decoration-none border-bottom">Info</h2>
         <div class="list-group list-group-flush border-bottom">
-            <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
-            <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
-            <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
-            <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
-            <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+            <div class="px-2">
+                <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
+                <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
+                <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
+                <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
+            </div>
+            <div class="border-top pt-3 px-2">
+                <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+            </div>
         </div>
     </aside>
 </main>
