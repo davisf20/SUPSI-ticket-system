@@ -6,42 +6,58 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
 
-    <link rel="stylesheet" type="text/css" href="../static/CSS/ticketForm.css" th:href="@{'/CSS/ticketForm.css'}">
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/form.css" th:href="@{'/CSS/form.css'}">
 
     <title>Edit Ticket</title>
 </head>
 <body>
-<div th:replace="header :: head"></div>
 <div th:replace="navbar :: nav"></div>
-<main>
-    <section>
-        <form action="#" th:action="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="post" enctype="multipart/form-data">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" th:value="*{title}" th:field="*{title}" required placeholder="Title">
+<div th:replace="header :: head"></div>
+<main class="container my-5 d-flex flex-wrap justify-content-center align-items-center w-100">
+    <section class="rounded-4 p-5 w-50 text-secondary bg-dark">
+        <form class="w-100" action="#" th:action="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="post" enctype="multipart/form-data">
+            <h2 class="d-block text-center pb-4 text-light"><b>Edit Ticket</b></h2>
             <br>
-            <label for="user">Author:</label>
-            <select id="user" name="user" th:field="*{user}">
-                <option th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
-            </select>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="title">Title</label>
+                <input class="w-100 px-1 text-light d-block outline-0 border-0" type="text" id="title" name="title" th:value="*{title}" th:field="*{title}" required placeholder="Title">
+            </div>
             <br>
-            <label for="type">Type:</label>
-            <select id="type" name="type" th:field="*{type}">
-                <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
-            </select>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1"  for="user">Author</label>
+                <select class="text-light border-0 position-absolute" id="user" name="user" th:field="*{user}">
+                    <option th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
+                </select>
+            </div>
             <br>
-            <label for="status">Status:</label>
-            <select id="status" name="status" th:field="*{status}">
-                <option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
-            </select>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="type">Type</label>
+                <select class="text-light border-0 position-absolute" id="type" name="type" th:field="*{type}">
+                    <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
+                </select>
+            </div>
             <br>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" th:value="*{description}" th:field="*{description}" placeholder="Description"></textarea>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="status">Status</label>
+                <select class="text-light border-0 position-absolute" id="status" name="status" th:field="*{status}">
+                    <option th:each="status : ${statusList}" th:value="${status.getId()}" th:text="${status.getName()}"></option>
+                </select>
+            </div>
             <br>
-            <label for="file">File:</label>
-            <input type="file" id="file" name="file">
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="description">Description</label>
+                <textarea class="py-2 px-1 text-light xd-block w-100 border-0" id="description" name="description" th:value="*{description}" th:field="*{description}" placeholder="Description"></textarea>
+            </div>
             <br>
-            <input type="submit" value="Save ticket">
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="file">File</label>
+                <input class="w-100 px-1 d-block text-light outline-0 bg-dark rounded-4" type="file" id="file" name="file">
+            </div>
+            <br>
+            <div class="d-flex flex-wrap justify-content-center pt-2 w-100">
+                <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Save ticket">
+            </div>
         </form>
     </section>
 </main>

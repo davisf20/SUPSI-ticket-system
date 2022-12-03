@@ -1,4 +1,10 @@
 input, select, textarea {
     outline: none;
     background-color: inherit;
+    color: inherit;
+}
+
+input[type="submit"]:hover {
+    background-color: #4CAF50; /* TODO: not works */
+    color: white;
 }

@@ -6,40 +6,52 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Davis Fusco">
 
-    <link rel="stylesheet" type="text/css" href="../static/CSS/ticketDetails.css" th:href="@{'/CSS/ticketDetails.css'}">
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/CSS/details.css" th:href="@{'/CSS/details.css'}">
 
     <title>Ticket Details</title>
 </head>
 <body>
-<div th:replace="header :: head"></div>
 <div th:replace="navbar :: nav"></div>
-<main>
-    <section>
-        <article>
-            <h2 th:text="${ticket.title}">Ticket 1</h2>
+<div th:replace="header :: head"></div>
+<main class="container my-5 d-flex flex-wrap justify-content-center align-items-center w-100">
+    <section class="rounded-4 p-5 w-50 text-secondary bg-dark">
+        <article class="w-100">
+            <h2 class="text-center text-light" th:text="${ticket.title}">Ticket 1</h2>
+            <br>
             <div>
                 <b>Author:</b>
-                <p th:if="${ticket.user} != null" th:text="${ticket.user.getFirstName()} + ' ' + ${ticket.user.getLastName()}">Pippo</p>
+                <p class="text-light" th:if="${ticket.user} != null" th:text="${ticket.user.getFirstName()} + ' ' + ${ticket.user.getLastName()}">Pippo</p>
             </div>
+            <br>
             <div>
                 <b>Type:</b>
-                <p th:text="${ticket.type.getName()}">Task</p>
+                <p class="text-light" th:text="${ticket.type.getName()}">Task</p>
             </div>
+            <br>
             <div>
                 <b>Date:</b>
-                <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <time class="text-light" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
             </div>
+            <br>
             <div>
                 <b>Status:</b>
-                <p th:text="${ticket.status.getName()}">Open</p>
+                <p class="text-light" th:text="${ticket.status.getName()}">Open</p>
             </div>
+            <br>
             <div>
                 <b>Description:</b>
-                <p th:text="${ticket.description}">This is the description of the Ticket 1.</p>
+                <p class="text-light" th:text="${ticket.description}">This is the description of the Ticket 1.</p>
             </div>
-            <a th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
-            <a th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
+            <br>
+            <div class="d-flex w-100 gap-3">
+                <div class="w-50 p-2 text-center bg-blue bg-gradient rounded-pill"> <!-- TODO: change color -->
+                    <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
+                </div>
+                <div class="w-50 p-2 text-center bg-danger bg-gradient rounded-pill">
+                    <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
+                </div>
+            </div>
         </article>
     </section>
 </main>
