@@ -13,26 +13,28 @@
 <body>
 <div th:replace="navbar :: nav"></div>
 <div th:replace="header :: head"></div>
-<main>
-    <section class="container">
+<main class="ms-md-5 d-md-flex align-items-stretch">
+    <section class="container my-5">
         <h2>Tickets</h2>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-        <article class="col card shadow-sm p-3 m-3" th:each="ticket : ${tickets}">
-            <h3 th:text="${ticket.title}">Ticket 1</h3>
-            <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
-            <p th:text="${ticket.status.getName()}">OPEN</p>
-            <p th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
-            <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
-        </article>
+            <article class="col card shadow-sm p-3 m-3" th:each="ticket : ${tickets}">
+                <h3 th:text="${ticket.title}">Ticket 1</h3>
+                <time th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <p th:text="${ticket.status.getName()}">OPEN</p>
+                <p th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+            </article>
         </div>
     </section>
-    <aside class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
-        <h2>Info</h2>
-        <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
-        <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
-        <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
-        <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
-        <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+    <aside class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+        <h2 class="d-flex align-items-center flex-shrink-0 p-3 text-light text-decoration-none border-bottom">Info</h2>
+        <div class="list-group list-group-flush border-bottom">
+            <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
+            <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
+            <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
+            <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
+            <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+        </div>
     </aside>
 </main>
 <div th:replace="footer :: footer"></div>
