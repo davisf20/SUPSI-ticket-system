@@ -26,15 +26,15 @@
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="user">Author</label>
-                <select class="text-light border-0 position-absolute" id="user" name="user" th:field="*{user}">
-                    <option th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
+                <select class="d-block text-light border-0" id="user" name="user" th:field="*{user}">
+                    <option class="bg-dark" th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
                 </select>
             </div>
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="type">Type</label>
-                <select class="text-light border-0 position-absolute" id="type" name="type" th:field="*{type}">
-                    <option th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
+                <select class="d-block text-light border-0" id="type" name="type" th:field="*{type}">
+                    <option class="bg-dark" th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>
                 </select>
             </div>
             <br>
@@ -49,7 +49,7 @@
             </div>
             <br>
             <div class="d-flex flex-wrap justify-content-center pt-2 w-100">
-                <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Create ticket"/> <!-- TODO: better style -->
+                <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Create ticket"/>
             </div>
         </form>
     </section>

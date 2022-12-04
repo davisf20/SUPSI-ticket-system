@@ -16,8 +16,8 @@
 <main class="ms-md-5 d-md-flex align-items-stretch">
     <section class="container my-5">
         <h2>Tickets</h2>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-            <article class="col card shadow-sm p-3 m-3" th:each="ticket : ${tickets}">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 gap-3">
+            <article class="col card shadow-sm p-3" th:each="ticket : ${tickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">

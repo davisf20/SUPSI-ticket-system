@@ -5,6 +5,6 @@ input, select, textarea {
 }
 
 input[type="submit"]:hover {
-    background-color: #4CAF50; /* TODO: not works */
-    color: white;
+    background-color: gray!important;
+    color: white!important;
 }

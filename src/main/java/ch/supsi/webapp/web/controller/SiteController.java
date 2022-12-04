@@ -4,12 +4,12 @@ import ch.supsi.webapp.web.model.Attachment;
 import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -72,6 +72,16 @@ public class SiteController {
         return "redirect:/";
     }
 
+    @GetMapping("/ticket/{id}/attachment")
+    @ResponseBody
+    public ResponseEntity<Resource> getAttachment(@PathVariable int id) { // TODO: fix return without name and extension
+        Ticket ticket = ticketService.get(id);
+        Attachment attachment = ticket.getAttachment();
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=\"" + attachment.getId() + "\"")
+                .body(new ByteArrayResource(attachment.getFile()));
+    }
+
     // return the form to edit the ticket with the given id
     @GetMapping("/ticket/{id}/edit")
     public String getEditForm(@PathVariable int id, Model model) {
@@ -85,7 +95,7 @@ public class SiteController {
 
     // edit the ticket with the given id
     @PostMapping("/ticket/{id}/edit")
-    public String editTicket(@PathVariable int id, Ticket ticket, Model model, @RequestParam("file") MultipartFile file) throws IOException {
+    public String editTicket(@PathVariable int id, Ticket ticket, @RequestParam("file") MultipartFile file) throws IOException {
         Ticket t = ticketService.get(id);
         t.setTitle(ticket.getTitle());
         t.setUser(ticket.getUser());
@@ -106,9 +116,7 @@ public class SiteController {
         }
         ticketService.update(t);
 
-        model.addAttribute("ticket", ticketService.get(id));
-
-        return "ticketDetails";
+        return "redirect:/ticket/" + id;
     }
 
     // delete the ticket with the given id
