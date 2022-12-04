@@ -17,6 +17,9 @@ public class Attachment {
     @GeneratedValue
     private int id;
 
+    @Column
+    private String name;
+
     @Lob
     private byte[] file;
 }

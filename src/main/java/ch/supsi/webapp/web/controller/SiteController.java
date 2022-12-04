@@ -102,7 +102,6 @@ public class SiteController {
         t.setType(ticket.getType());
         t.setStatus(ticket.getStatus());
         t.setDescription(ticket.getDescription());
-        t.setAttachment(ticket.getAttachment());
         if (!file.isEmpty()) {
             Attachment attachment = new Attachment();
             attachment.setFile(file.getBytes());
@@ -114,6 +113,7 @@ public class SiteController {
             }
             attachmentService.save(attachment);
         }
+        t.setAttachment(ticket.getAttachment());
         ticketService.update(t);
 
         return "redirect:/ticket/" + id;
