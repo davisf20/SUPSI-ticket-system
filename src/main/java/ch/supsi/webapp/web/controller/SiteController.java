@@ -63,6 +63,7 @@ public class SiteController {
     public String newTicket(Ticket ticket, @RequestParam("file") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             Attachment attachment = new Attachment();
+            attachment.setName(file.getOriginalFilename());
             attachment.setFile(file.getBytes());
             ticket.setAttachment(attachment);
             attachmentService.save(attachment);
@@ -74,11 +75,11 @@ public class SiteController {
 
     @GetMapping("/ticket/{id}/attachment")
     @ResponseBody
-    public ResponseEntity<Resource> getAttachment(@PathVariable int id) { // TODO: fix return without name and extension
+    public ResponseEntity<Resource> getAttachment(@PathVariable int id) {
         Ticket ticket = ticketService.get(id);
         Attachment attachment = ticket.getAttachment();
         return ResponseEntity.ok()
-                .header("Content-Disposition", "attachment; filename=\"" + attachment.getId() + "\"")
+                .header("Content-Disposition", "attachment; filename=\"" + attachment.getName() + "\"")
                 .body(new ByteArrayResource(attachment.getFile()));
     }
 
@@ -104,6 +105,7 @@ public class SiteController {
         t.setDescription(ticket.getDescription());
         if (!file.isEmpty()) {
             Attachment attachment = new Attachment();
+            attachment.setName(file.getOriginalFilename());
             attachment.setFile(file.getBytes());
             ticket.setAttachment(attachment);
 

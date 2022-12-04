@@ -45,7 +45,7 @@
             <br>
             <div>
                 <b class="d-block">File:</b>
-                <a class="text-light" th:if="${ticket.attachment} != null" th:href="@{'/ticket/' + ${ticket.id} + '/attachment'}" th:text="${ticket.attachment.id}">File 1</a> <!-- TODO: file name -->
+                <a class="text-light" th:if="${ticket.attachment} != null" th:href="@{'/ticket/' + ${ticket.id} + '/attachment'}" th:text="${ticket.attachment.name}">File 1</a>
                 <p class="text-light" th:if="${ticket.attachment} == null">Empty</p>
             </div>
             <br>
