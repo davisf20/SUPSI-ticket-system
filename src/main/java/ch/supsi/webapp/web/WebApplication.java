@@ -1,7 +1,9 @@
 package ch.supsi.webapp.web;
 
+import ch.supsi.webapp.web.model.Role;
 import ch.supsi.webapp.web.model.Status;
 import ch.supsi.webapp.web.model.Type;
+import ch.supsi.webapp.web.service.RoleService;
 import ch.supsi.webapp.web.service.StatusService;
 import ch.supsi.webapp.web.service.TypeService;
 import org.springframework.boot.CommandLineRunner;
@@ -39,6 +41,20 @@ public class WebApplication {
 					Type type = new Type();
 					type.setName(name);
 					typeService.save(type);
+				}
+			}
+		};
+	}
+
+	@Bean
+	public CommandLineRunner addRoles(RoleService roleService) {
+		return args -> {
+			if (roleService.getAll().size() == 0) {
+				String[] names = {"ROLE_ADMIN", "ROLE_USER"};
+				for (String name : names) {
+					Role role = new Role();
+					role.setName(name);
+					roleService.save(role);
 				}
 			}
 		};

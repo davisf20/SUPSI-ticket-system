@@ -22,6 +22,14 @@ public class User {
     @Column
     private String lastName;
 
+    @Column
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_role")
+    @JsonIgnoreProperties("role")
+    private Role role;
+
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("tickets")
     private List<Ticket> tickets;
