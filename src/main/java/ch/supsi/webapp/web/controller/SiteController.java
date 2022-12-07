@@ -138,13 +138,16 @@ public class SiteController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("user", new User());
+
         return "register";
     }
 
     @PostMapping("/register")
     public String register(User user) {
         userService.save(user);
+
         return "redirect:/login";
     }
 
