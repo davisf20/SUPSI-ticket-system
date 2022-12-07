@@ -23,6 +23,9 @@ public class User {
     private String lastName;
 
     @Column
+    private String username;
+
+    @Column
     private String password;
 
     @ManyToOne

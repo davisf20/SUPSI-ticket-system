@@ -2,16 +2,19 @@ package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.model.Attachment;
 import ch.supsi.webapp.web.model.Ticket;
+import ch.supsi.webapp.web.model.User;
 import ch.supsi.webapp.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
@@ -60,7 +63,11 @@ public class SiteController {
 
     // create a new ticket
     @PostMapping("/ticket/new")
-    public String newTicket(Ticket ticket, @RequestParam("file") MultipartFile file) throws IOException {
+    public String newTicket(Ticket ticket, @RequestParam("file") MultipartFile file, HttpSession session) throws IOException {
+        SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        User user = (User) sc.getAuthentication().getPrincipal();
+        ticket.setUser(userService.getByUsername(user.getUsername()));
+
         if (!file.isEmpty()) {
             Attachment attachment = new Attachment();
             attachment.setName(file.getOriginalFilename());
@@ -68,6 +75,7 @@ public class SiteController {
             ticket.setAttachment(attachment);
             attachmentService.save(attachment);
         }
+
         ticketService.create(ticket);
 
         return "redirect:/";
@@ -127,5 +135,23 @@ public class SiteController {
         ticketService.delete(id);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/register")
+    public String register() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(User user) {
+        userService.save(user);
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+
+        return "login";
     }
 }

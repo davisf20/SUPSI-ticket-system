@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ticket service project">
@@ -17,7 +17,14 @@
             <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66"
                  height="36.96">
             <a th:href="@{'/'}" class="text-light text-decoration-none">Home</a>
-            <a th:href="@{'/ticket/new'}" class="text-light text-decoration-none">Create a Ticket</a>
+            <a sec:authorize="isAuthenticated()" th:href="@{'/ticket/new'}" class="text-light text-decoration-none">Create a Ticket</a>
+        </div>
+        <div sec:authorize="isAuthenticated()" class="navbar-brand d-flex flex-wrap align-items-end gap-3">
+            <div sec:authentication="name"></div>
+            <a th:href="@{'/logout'}" class="text-light text-decoration-none">Logout</a>
+        </div>
+        <div sec:authorize="!isAuthenticated()" class="navbar-brand d-flex flex-wrap align-items-end gap-3">
+            <a th:href="@{'/login'}" class="text-light text-decoration-none">Login</a>
         </div>
     </div>
 </nav>
