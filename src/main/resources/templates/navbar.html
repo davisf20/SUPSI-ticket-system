@@ -19,13 +19,19 @@
             <a th:href="@{'/'}" class="text-light text-decoration-none">Home</a>
             <a sec:authorize="isAuthenticated()" th:href="@{'/ticket/new'}" class="text-light text-decoration-none">Create a Ticket</a>
         </div>
-        <div sec:authorize="isAuthenticated()" class="navbar-brand d-flex flex-wrap align-items-end gap-3">
-            <div sec:authentication="name"></div>
-            <a th:href="@{'/logout'}" class="text-light text-decoration-none">Logout</a>
+        <div sec:authorize="isAuthenticated()" class="d-flex flex-wrap align-items-end gap-3">
+            <div class="navbar-brand" sec:authentication="name"></div>
+            <div class="p-2 text-center bg-primary bg-gradient rounded-pill">
+                <a th:href="@{'/logout'}" class="text-light text-decoration-none">Logout</a>
+            </div>
         </div>
-        <div sec:authorize="!isAuthenticated()" class="navbar-brand d-flex flex-wrap align-items-end gap-3">
-            <a th:href="@{'/login'}" class="text-light text-decoration-none">Login</a>
-            <a th:href="@{'/register'}" class="text-light text-decoration-none">Registration</a>
+        <div sec:authorize="!isAuthenticated()" class="d-flex flex-wrap align-items-end gap-3">
+            <div class="p-2 text-center bg-primary bg-gradient rounded-pill">
+                <a th:href="@{'/login'}" class="text-light text-decoration-none">Login</a>
+            </div>
+            <div class="p-2 text-center bg-primary bg-gradient rounded-pill">
+                <a th:href="@{'/register'}" class="text-light text-decoration-none">Registration</a>
+            </div>
         </div>
     </div>
 </nav>

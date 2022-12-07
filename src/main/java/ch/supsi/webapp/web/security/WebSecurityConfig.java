@@ -35,7 +35,7 @@ public class WebSecurityConfig {
                 .mvcMatchers("/tickets/**").permitAll()
                 .anyRequest().authenticated()
             .and()
-                .formLogin() // TODO: fix redirect after login
+                .formLogin()
                 .loginPage("/login")
                 .failureUrl("/login?error")
             .and()
