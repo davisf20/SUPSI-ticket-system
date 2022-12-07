@@ -7,13 +7,13 @@
     <meta name="author" content="Davis Fusco">
 
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/CSS/form.css" th:href="@{'/CSS/form.css'}">
+    <link rel="stylesheet" type="text/css" href="../static/css/form.css" th:href="@{'/css/form.css'}">
 
     <title>Ticket Service Registration</title>
 </head>
-<body>
+<body class="bg-secondary">
 <main class="container my-5 d-flex flex-wrap justify-content-center align-items-center w-100">
-    <section class="rounded-4 p-5 w-50 text-secondary bg-dark">
+    <section class="rounded-4 p-5 mt-5 w-50 text-secondary bg-dark">
         <form class="w-100" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
             <h2 class="d-block text-center pb-4 text-light"><b>Registration</b></h2>
             <br>
@@ -32,13 +32,13 @@
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="password">Password</label>
-                <input class="w-100 px-1 d-block text-light outline-0 border-0" type="text" id="password" name="password" th:field="*{password}" required placeholder="Password">
+                <input class="w-100 px-1 d-block text-light outline-0 border-0" type="password" id="password" name="password" th:field="*{password}" required placeholder="Password">
             </div>
             <br>
             <div class="d-flex flex-wrap justify-content-center pt-2 w-100">
                 <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Register"/>
             </div>
-            <div>
+            <div class="d-flex justify-content-center mt-5">
                 <p class="mb-0">Already have an account? <a th:href="@{'/login'}" class="text-white-50 fw-bold">Login</a></p>
             </div>
         </form>

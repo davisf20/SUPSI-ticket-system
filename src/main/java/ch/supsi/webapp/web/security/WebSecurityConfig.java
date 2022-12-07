@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -18,27 +19,23 @@ public class WebSecurityConfig {
     private CustomUserDetailService customUserDetailService;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .mvcMatchers("/", "/home-table").permitAll()
                 .mvcMatchers("/ticket/new").authenticated()
-                .mvcMatchers("/ticket/*/edit").authenticated()
+                .mvcMatchers("/ticket/*/edit").hasRole("ADMIN")
                 .mvcMatchers("/ticket/*/delete").hasRole("ADMIN")
                 .mvcMatchers("/ticket/**").permitAll()
                 .mvcMatchers("/css/**").permitAll()
+                .mvcMatchers("/images/**").permitAll()
                 .mvcMatchers("/webjars/**").permitAll()
                 .mvcMatchers("/fonts/**").permitAll()
                 .mvcMatchers("/login", "/register").permitAll()
                 .mvcMatchers("/tickets/**").permitAll()
                 .anyRequest().authenticated()
             .and()
-                .formLogin()
+                .formLogin() // TODO: fix redirect after login
                 .loginPage("/login")
                 .failureUrl("/login?error")
             .and()

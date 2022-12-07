@@ -55,7 +55,6 @@ public class SiteController {
     @GetMapping("/ticket/new")
     public String getForm(Model model) {
         model.addAttribute("ticket", new Ticket());
-        model.addAttribute("userList", userService.getAll());
         model.addAttribute("typeList", typeService.getAll());
 
         return "createTicketForm";
