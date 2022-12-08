@@ -23,6 +23,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void update(User user) {
+        if (exists(user.getId())) {
+            userRepository.save(user);
+        }
+    }
+
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }

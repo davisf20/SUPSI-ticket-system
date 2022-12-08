@@ -68,16 +68,20 @@ public class WebApplication {
 		return args -> { // TODO: fix default users, they cannot login
 			if (userService.getByUsername("admin") == null) {
 				User user = new User();
+				user.setFirstName("user");
+				user.setLastName("user");
 				user.setUsername("user");
 				user.setPassword(new BCryptPasswordEncoder().encode("user"));
-				user.setRole(roleService.get(1));
 				userService.save(user);
 
 				User admin = new User();
+				admin.setFirstName("admin");
+				admin.setLastName("admin");
 				admin.setUsername("admin");
 				admin.setPassword(new BCryptPasswordEncoder().encode("admin"));
-				admin.setRole(roleService.get(0));
 				userService.save(admin);
+				admin.setRole(roleService.get(0));
+				userService.update(admin);
 			}
 		};
 	}
