@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.service;
 
 import ch.supsi.webapp.web.model.User;
+import ch.supsi.webapp.web.repository.RoleRepository;
 import ch.supsi.webapp.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,20 +14,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private RoleService roleService;
+    private RoleRepository roleRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole(roleService.get(1));
+        user.setRole(roleRepository.findByName("ROLE_USER").orElse(null));
         userRepository.save(user);
-    }
-
-    public void update(User user) {
-        if (exists(user.getId())) {
-            userRepository.save(user);
-        }
     }
 
     public List<User> getAll() {
