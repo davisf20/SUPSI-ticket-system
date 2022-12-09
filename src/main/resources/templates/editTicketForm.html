@@ -25,13 +25,6 @@
             </div>
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
-                <label class="ps-1"  for="user">Author</label>
-                <select class="d-block text-light border-0" id="user" name="user" th:field="*{user}">
-                    <option class="bg-dark" th:each="user : ${userList}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
-                </select>
-            </div>
-            <br>
-            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="type">Type</label>
                 <select class="d-block text-light border-0" id="type" name="type" th:field="*{type}">
                     <option class="bg-dark" th:each="type : ${typeList}" th:value="${type.getId()}" th:text="${type.getName()}"></option>

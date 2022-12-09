@@ -49,11 +49,11 @@
                 <p class="text-light" th:if="${ticket.attachment} == null">Empty</p>
             </div>
             <br>
-            <div class="d-flex w-100 gap-3" sec:authorize="isAuthenticated()" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+            <div class="d-flex w-100 gap-3" sec:authorize="isAuthenticated()">
                 <div class="w-50 p-2 text-center bg-primary bg-gradient rounded-pill">
                     <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
                 </div>
-                <div class="w-50 p-2 text-center bg-danger bg-gradient rounded-pill">
+                <div class="w-50 p-2 text-center bg-danger bg-gradient rounded-pill" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                     <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
                 </div>
             </div>

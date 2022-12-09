@@ -106,7 +106,6 @@ public class SiteController {
     public String editTicket(@PathVariable int id, Ticket ticket, @RequestParam("file") MultipartFile file) throws IOException {
         Ticket t = ticketService.get(id);
         t.setTitle(ticket.getTitle());
-        t.setUser(ticket.getUser());
         t.setType(ticket.getType());
         t.setStatus(ticket.getStatus());
         t.setDescription(ticket.getDescription());

@@ -24,7 +24,7 @@ public class WebSecurityConfig {
                 .authorizeRequests()
                 .mvcMatchers("/", "/home-table").permitAll()
                 .mvcMatchers("/ticket/new").authenticated()
-                .mvcMatchers("/ticket/*/edit").hasRole("ADMIN")
+                .mvcMatchers("/ticket/*/edit").authenticated()
                 .mvcMatchers("/ticket/*/delete").hasRole("ADMIN")
                 .mvcMatchers("/ticket/**").permitAll()
                 .mvcMatchers("/css/**").permitAll()
