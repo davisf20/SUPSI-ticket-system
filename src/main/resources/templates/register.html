@@ -8,6 +8,7 @@
 
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/css/form.css" th:href="@{'/css/form.css'}">
+    <script type="text/javascript" src="../static/js/register.js" th:src="@{'/js/register.js'}"></script>
 
     <title>Ticket Service Registration</title>
 </head>
@@ -32,11 +33,17 @@
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="password">Password</label>
-                <input class="w-100 px-1 d-block text-light outline-0 border-0" type="password" id="password" name="password" th:field="*{password}" required placeholder="Password">
+                <input class="w-100 px-1 d-block text-light outline-0 border-0" type="password" id="password" name="password" th:field="*{password}" onkeyup='passwordCheck();' required placeholder="Password">
             </div>
             <br>
-            <div class="d-flex flex-wrap justify-content-center pt-2 w-100">
-                <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Register"/>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="confirm-password">Confirm Password</label>
+                <input class="w-100 px-1 d-block text-light outline-0 border-0" type="password" id="confirm-password" name="confirm-password" onkeyup='passwordCheck();' required placeholder="Password">
+             </div>
+            <span id='message'></span>
+            <br>
+            <div class="d-flex flex-wrap justify-content-center pt-2 w-100 mt-3">
+                <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" id="registerSubmit" value="Register"/>
             </div>
             <div class="d-flex justify-content-center mt-5">
                 <p class="mb-0">Already have an account? <a th:href="@{'/login'}" class="text-white-50 fw-bold">Login</a></p>
