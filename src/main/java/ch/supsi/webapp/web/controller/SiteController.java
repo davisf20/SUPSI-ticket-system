@@ -64,7 +64,7 @@ public class SiteController {
     @PostMapping("/ticket/new")
     public String newTicket(Ticket ticket, @RequestParam("file") MultipartFile file, HttpSession session) throws IOException {
         SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
-        User user = (User) sc.getAuthentication().getPrincipal();
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) sc.getAuthentication().getPrincipal();
         ticket.setUser(userService.getByUsername(user.getUsername()));
 
         if (!file.isEmpty()) {
