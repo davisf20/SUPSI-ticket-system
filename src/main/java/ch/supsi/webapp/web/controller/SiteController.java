@@ -144,6 +144,11 @@ public class SiteController {
 
     @PostMapping("/register")
     public String register(User user) {
+
+        if (userService.getByUsername(user.getUsername()) != null) {
+            return "redirect:/register";
+        }
+
         userService.save(user);
 
         return "redirect:/login";
