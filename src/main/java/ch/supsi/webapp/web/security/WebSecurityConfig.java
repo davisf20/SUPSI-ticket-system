@@ -28,6 +28,7 @@ public class WebSecurityConfig {
                 .mvcMatchers("/ticket/*/delete").hasRole("ADMIN")
                 .mvcMatchers("/ticket/**").permitAll()
                 .mvcMatchers("/css/**").permitAll()
+                .mvcMatchers("/js/**").permitAll()
                 .mvcMatchers("/images/**").permitAll()
                 .mvcMatchers("/webjars/**").permitAll()
                 .mvcMatchers("/fonts/**").permitAll()
