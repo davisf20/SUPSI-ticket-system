@@ -1,19 +1,18 @@
 const nameRegex = /^[A-Za-z]*$/;
 const usernameRegex = /^[A-Za-z0-9_]*$/;
-//const submitButton = document.getElementById('registerSubmit');
-const submitButton = document.querySelector('#registerSubmit');
+const elements = new Set();
 
 const checkFirstName = function () {
     const firstName = document.querySelector('#firstName');
     const firstNameMessage = document.querySelector('#firstNameMessage');
 
     if (nameRegex.test(firstName.value)) {
-        //submitButton.disabled = false;
         firstNameMessage.innerHTML = '';
+        elements.add(firstName);
     } else {
-        //submitButton.disabled = true;
         firstNameMessage.style.color = 'red';
         firstNameMessage.innerHTML = 'First name must only contain letters';
+        elements.delete(firstName);
     }
 };
 
@@ -22,12 +21,12 @@ const checkLastName = function () {
     const lastNameMessage = document.querySelector('#lastNameMessage');
 
     if (nameRegex.test(lastName.value)) {
-        //submitButton.disabled = false;
         lastNameMessage.innerHTML = '';
+        elements.add(lastName);
     } else {
-        //submitButton.disabled = true;
         lastNameMessage.style.color = 'red';
         lastNameMessage.innerHTML = 'Last name must only contain letters';
+        elements.delete(lastName);
     }
 };
 
@@ -36,12 +35,12 @@ const checkUsername = function () {
     const usernameMessage = document.getElementById('usernameMessage');
 
     if (usernameRegex.test(username.value)) {
-        //submitButton.disabled = false;
         usernameMessage.innerHTML = '';
+        elements.add(username);
     } else {
-        //submitButton.disabled = true;
         usernameMessage.style.color = 'red';
         usernameMessage.innerHTML = 'Username must only contain letters, numbers and underscores';
+        elements.delete(username);
     }
 };
 
@@ -55,19 +54,28 @@ const passwordCheck = function () {
         passwordMessage.innerHTML = '';
 
         if (password.value === confirmPassword.value) {
-            //submitButton.disabled = false;
             confirmPasswordMessage.innerHTML = '';
+            elements.add(password);
         } else {
-            //submitButton.disabled = true;
             confirmPasswordMessage.style.color = 'red';
             confirmPasswordMessage.innerHTML = 'The passwords do not match';
+            elements.delete(password);
         }
     } else {
-        //submitButton.disabled = true;
         passwordMessage.style.color = 'red';
         passwordMessage.innerHTML = 'Password must only contain letters, numbers and underscores and be between 8 and 15 characters long';
+        elements.delete(password);
     }
 };
+
+const createSubmitButton = function () {
+    const submitButton = document.createElement('button');
+    submitButton.id = 'registerSubmit';
+    submitButton.type = 'submit';
+    submitButton.innerHTML = 'Register';
+    submitButton.className = 'btn rounded-4 text-dark bg-light bg-gradient w-100';
+    document.getElementById("submitDiv").appendChild(submitButton);
+}
 
 window.onload = function () {
     const firstName = document.getElementById('firstName');
@@ -81,4 +89,8 @@ window.onload = function () {
     username.addEventListener('input', checkUsername);
     password.addEventListener('input', passwordCheck);
     confirmPassword.addEventListener('input', passwordCheck);
+
+    if (elements.size === 4) {
+        createSubmitButton();
+    }
 }
