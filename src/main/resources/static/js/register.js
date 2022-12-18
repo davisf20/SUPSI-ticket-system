@@ -77,6 +77,16 @@ const createSubmitButton = function () {
     document.getElementById("submitDiv").appendChild(submitButton);
 }
 
+const checkSubmit = function () {
+    if (elements.size === 4) {
+        if (document.getElementById('registerSubmit') === null) {
+            createSubmitButton();
+        }
+    } else {
+        document.getElementById("registerSubmit").remove();
+    }
+}
+
 window.onload = function () {
     const firstName = document.getElementById('firstName');
     const lastName = document.getElementById('lastName');
@@ -90,7 +100,7 @@ window.onload = function () {
     password.addEventListener('input', passwordCheck);
     confirmPassword.addEventListener('input', passwordCheck);
 
-    if (elements.size === 4) {
-        createSubmitButton();
-    }
+    document
+        .querySelectorAll("input")
+        .forEach((elem) => elem.addEventListener('input', checkSubmit));
 }
