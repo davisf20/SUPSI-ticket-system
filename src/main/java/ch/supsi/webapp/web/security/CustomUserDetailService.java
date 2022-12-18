@@ -2,7 +2,6 @@ package ch.supsi.webapp.web.security;
 
 import ch.supsi.webapp.web.model.User;
 import ch.supsi.webapp.web.repository.UserRepository;
-import ch.supsi.webapp.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
