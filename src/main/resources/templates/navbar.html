@@ -19,6 +19,9 @@
             <a th:href="@{'/'}" class="text-light text-decoration-none">Home</a>
             <a sec:authorize="isAuthenticated()" th:href="@{'/ticket/new'}" class="text-light text-decoration-none">Create a Ticket</a>
         </div>
+        <div class="d-flex gap-2">
+            <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </div>
         <div sec:authorize="isAuthenticated()" class="d-flex flex-wrap align-items-end gap-3">
             <div class="navbar-brand" sec:authentication="name"></div>
             <div class="p-2 text-center bg-primary bg-gradient rounded-pill">

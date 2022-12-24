@@ -1,8 +1,10 @@
 package ch.supsi.webapp.web.service;
 
 import ch.supsi.webapp.web.model.Ticket;
+import ch.supsi.webapp.web.model.User;
 import ch.supsi.webapp.web.repository.StatusRepository;
 import ch.supsi.webapp.web.repository.TicketRepository;
+import ch.supsi.webapp.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +50,17 @@ public class TicketService {
 
     public void delete(int id) {
         ticketRepository.deleteById(id);
+    }
+
+    public List<Ticket> search(String q) {
+        List<Ticket> tickets;
+
+        if (q != null && !q.isEmpty()) {
+            tickets = ticketRepository.findByTitleContainingOrAuthorContainingOrDescriptionContaining(q);
+        } else {
+            tickets = getAll();
+        }
+
+        return tickets;
     }
 }

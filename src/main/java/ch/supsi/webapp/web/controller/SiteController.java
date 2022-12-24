@@ -7,6 +7,7 @@ import ch.supsi.webapp.web.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 public class SiteController {
@@ -159,5 +161,12 @@ public class SiteController {
         model.addAttribute("user", new User());
 
         return "login";
+    }
+
+    @GetMapping("/ticket/search")
+    public String search(@RequestParam String q, Model model) {
+        model.addAttribute("tickets", ticketService.search(q));
+
+        return "index :: searchResult";
     }
 }
