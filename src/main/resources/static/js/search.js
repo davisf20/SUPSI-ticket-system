@@ -9,16 +9,18 @@ window.onload = function () {
     const option = {method: 'GET'};
 
     searchInput.addEventListener('input', function(event) {
+        if (searchInput.value.length >= 3 || searchInput.value.length === 0) {
 
-        const searchValue = document.getElementById('searchInput').value;
+            const searchValue = document.getElementById('searchInput').value;
 
-        fetch(url+`?q=`+searchValue, option)
-            .then(function(response) {
-                return response.text();
-            })
-            .then(function(data) {
-                searchResults.innerHTML = '';
-                searchResults.innerHTML = data;
-            });
+            fetch(url + `?q=` + searchValue, option)
+                .then(function (response) {
+                    return response.text();
+                })
+                .then(function (data) {
+                    searchResults.innerHTML = '';
+                    searchResults.innerHTML = data;
+                });
+        }
     });
 }
