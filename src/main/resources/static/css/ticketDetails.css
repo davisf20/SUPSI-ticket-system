@@ -1,0 +1,20 @@
+.bubble {
+    background-color: lightgray;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 100%;
+    display: inline-block;
+}
+
+.message {
+    font-size: 1.2em;
+    margin: 0;
+    padding: 0;
+}
+
+.author-date {
+    font-size: 0.8em;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+}

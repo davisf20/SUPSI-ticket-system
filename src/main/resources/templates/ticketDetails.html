@@ -7,58 +7,69 @@
     <meta name="author" content="Davis Fusco">
 
     <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/ticketDetails.css" th:href="@{'/css/ticketDetails.css'}">
 
     <title>Ticket Details</title>
 </head>
 <body>
 <div th:replace="navbar :: nav"></div>
 <div th:replace="header :: head"></div>
-<main class="container my-5 d-flex flex-wrap justify-content-center align-items-center w-100">
-    <section class="rounded-4 p-5 w-50 text-secondary bg-dark">
-        <article class="w-100">
-            <h2 class="text-center text-light" th:text="${ticket.title}">Ticket 1</h2>
-            <br>
-            <div>
-                <b class="d-block">Author:</b>
-                <p class="text-light" th:if="${ticket.user} != null" th:text="${ticket.user.getFirstName()} + ' ' + ${ticket.user.getLastName()}">Pippo</p>
-            </div>
-            <br>
-            <div>
-                <b class="d-block">Type:</b>
-                <p class="text-light" th:text="${ticket.type.getName()}">Task</p>
-            </div>
-            <br>
-            <div>
-                <b class="d-block">Date:</b>
-                <time class="text-light" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
-            </div>
-            <br>
-            <div>
-                <b class="d-block">Status:</b>
-                <p class="text-light" th:text="${ticket.status.getName()}">Open</p>
-            </div>
-            <br>
-            <div>
-                <b class="d-block">Description:</b>
-                <p class="text-light" th:text="${ticket.description}">This is the description of the Ticket 1.</p>
-            </div>
-            <br>
-            <div>
-                <b class="d-block">File:</b>
-                <a class="text-light" th:if="${ticket.attachment} != null" th:href="@{'/ticket/' + ${ticket.id} + '/attachment'}" th:text="${ticket.attachment.name}">File 1</a>
-                <p class="text-light" th:if="${ticket.attachment} == null">Empty</p>
-            </div>
-            <br>
-            <div class="d-flex w-100 gap-3" sec:authorize="isAuthenticated()">
-                <div class="w-50 p-2 text-center bg-primary bg-gradient rounded-pill">
-                    <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
+<main class="container my-5 d-flex flex-wrap justify-content-center w-100">
+    <div class="d-flex w-50 gap-5" style="margin: 0 auto;">
+        <section class="rounded-4 p-5 w-100 text-secondary bg-dark">
+            <article class="w-100">
+                <h2 class="text-center text-light" th:text="${ticket.title}">Ticket 1</h2>
+                <br>
+                <div>
+                    <b class="d-block">Author:</b>
+                    <p class="text-light" th:if="${ticket.user} != null" th:text="${ticket.user.getFirstName()} + ' ' + ${ticket.user.getLastName()}">Pippo</p>
                 </div>
-                <div class="w-50 p-2 text-center bg-danger bg-gradient rounded-pill" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
+                <br>
+                <div>
+                    <b class="d-block">Type:</b>
+                    <p class="text-light" th:text="${ticket.type.getName()}">Task</p>
                 </div>
-            </div>
-        </article>
-    </section>
+                <br>
+                <div>
+                    <b class="d-block">Date:</b>
+                    <time class="text-light" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                </div>
+                <br>
+                <div>
+                    <b class="d-block">Status:</b>
+                    <p class="text-light" th:text="${ticket.status.getName()}">Open</p>
+                </div>
+                <br>
+                <div>
+                    <b class="d-block">Description:</b>
+                    <p class="text-light" th:text="${ticket.description}">This is the description of the Ticket 1.</p>
+                </div>
+                <br>
+                <div>
+                    <b class="d-block">File:</b>
+                    <a class="text-light" th:if="${ticket.attachment} != null" th:href="@{'/ticket/' + ${ticket.id} + '/attachment'}" th:text="${ticket.attachment.name}">File 1</a>
+                    <p class="text-light" th:if="${ticket.attachment} == null">Empty</p>
+                </div>
+                <br>
+                <div class="d-flex w-100 gap-3" sec:authorize="isAuthenticated()">
+                    <div class="w-50 p-2 text-center bg-primary bg-gradient rounded-pill">
+                        <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/edit'}" th:object="${ticket}" method="get">Edit</a>
+                    </div>
+                    <div class="w-50 p-2 text-center bg-danger bg-gradient rounded-pill" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a class="text-light text-decoration-none" th:href="@{'/ticket/' + ${ticket.id} + '/delete'}" th:object="${ticket}" method="get">Delete</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section class="rounded-4 p-3 w-100 border text-secondary">
+            <article class="bubble p-3 w-100 d-flex flex-column m-0">
+                <p class="message m-0">Your message here</p>
+                <footer class="text-secondary mt-4">
+                    <small class="author-date text-secondary m-0 font-size-sm">Author Name - Date</small>
+                </footer>
+            </article>
+        </section>
+    </div>
 </main>
 <div th:replace="footer :: footer"></div>
 </body>

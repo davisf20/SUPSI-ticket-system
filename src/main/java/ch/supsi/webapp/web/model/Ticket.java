@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -44,4 +45,8 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "fk_attachment")
     private Attachment attachment;
+
+    @OneToMany(mappedBy = "ticket")
+    @JsonIgnoreProperties("messages")
+    private List<Message> messages;
 }
