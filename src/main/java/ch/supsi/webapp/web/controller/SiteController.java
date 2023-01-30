@@ -1,6 +1,7 @@
 package ch.supsi.webapp.web.controller;
 
 import ch.supsi.webapp.web.model.Attachment;
+import ch.supsi.webapp.web.model.Message;
 import ch.supsi.webapp.web.model.Ticket;
 import ch.supsi.webapp.web.model.User;
 import ch.supsi.webapp.web.service.*;
@@ -31,6 +32,8 @@ public class SiteController {
     private StatusService statusService;
     @Autowired
     private AttachmentService attachmentService;
+    @Autowired
+    private MessageService messageService;
 
     // return the list of tickets
     @GetMapping("/")
@@ -49,6 +52,7 @@ public class SiteController {
     @GetMapping("/ticket/{id}")
     public String getTicket(@PathVariable int id, Model model) {
         model.addAttribute("ticket", ticketService.get(id));
+        model.addAttribute("messages", messageService.getByTicketId(id));
 
         return "ticketDetails";
     }
@@ -168,5 +172,16 @@ public class SiteController {
         model.addAttribute("tickets", ticketService.search(q));
 
         return "index :: searchResult";
+    }
+
+    @PostMapping("/ticket/{id}/message")
+    public String addMessage(@PathVariable int id, Message message, HttpSession session) {
+        SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) sc.getAuthentication().getPrincipal();
+        message.setAuthor(userService.getByUsername(user.getUsername()));
+        message.setTicket(ticketService.get(id));
+        messageService.create(message);
+
+        return "redirect:/ticket/" + id;
     }
 }
