@@ -15,7 +15,7 @@
 <div th:replace="navbar :: nav"></div>
 <div th:replace="header :: head"></div>
 <main class="container my-5 d-flex flex-wrap justify-content-center w-100">
-    <div class="d-flex w-50 gap-5" style="margin: 0 auto;">
+    <div class="d-block w-50 gap-5" style="margin: 0 auto;">
         <section class="rounded-4 p-5 w-100 text-secondary bg-dark">
             <article class="w-100">
                 <h2 class="text-center text-light" th:text="${ticket.title}">Ticket 1</h2>
@@ -61,13 +61,17 @@
                 </div>
             </article>
         </section>
-        <section class="rounded-4 p-3 w-100 border text-secondary">
-            <article class="bubble p-3 w-100 d-flex flex-column m-0" th:each="message : ${messages}">
-                <p class="message m-0" th:text="${message.text}">Your message here</p>
+        <section class="rounded-4 p-3 w-100 border text-secondary mt-5">
+            <article class="bubble p-3 w-100 d-flex flex-column m-0 mb-3" th:each="messageSaved : ${messages}">
+                <p class="message m-0" th:text="${messageSaved.text}">Your message here</p>
                 <footer class="text-secondary mt-4">
-                    <small class="author-date text-secondary m-0 font-size-sm" th:text="${message.user.getFirstName()} + ' ' + ${message.user.getLastName()} + ' - ' + ${#temporals.format(message.creationDate, 'dd-MMM-yyyy')}">Author Name - Date</small>
+                    <small class="author-date text-secondary m-0 font-size-sm" th:text="${messageSaved.author.getFirstName()} + ' ' + ${messageSaved.author.getLastName()} + ' - ' + ${#temporals.format(messageSaved.creationDate, 'dd-MMM-yyyy')}">Author Name - Date</small>
                 </footer>
             </article>
+            <form class="w-100 d-flex flex-column gap-3 mt-3 align-bottom" sec:authorize="isAuthenticated()" th:action="@{'/ticket/' + ${ticket.id} + '/message'}" th:object="${message}" method="post">
+                <textarea class="form-control" th:field="*{text}" placeholder="Write your message here..."></textarea>
+                <button class="btn btn-primary" type="submit">Send</button>
+            </form>
         </section>
     </div>
 </main>

@@ -53,6 +53,7 @@ public class SiteController {
     public String getTicket(@PathVariable int id, Model model) {
         model.addAttribute("ticket", ticketService.get(id));
         model.addAttribute("messages", messageService.getByTicketId(id));
+        model.addAttribute("message", new Message());
 
         return "ticketDetails";
     }
