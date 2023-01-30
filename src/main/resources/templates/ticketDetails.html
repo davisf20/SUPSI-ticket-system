@@ -62,12 +62,14 @@
             </article>
         </section>
         <section class="rounded-4 p-3 w-100 border text-secondary mt-5">
-            <article class="bubble p-3 w-100 d-flex flex-column m-0 mb-3" th:each="messageSaved : ${messages}">
-                <p class="message m-0" th:text="${messageSaved.text}">Your message here</p>
-                <footer class="text-secondary mt-4">
-                    <small class="author-date text-secondary m-0 font-size-sm" th:text="${messageSaved.author.getFirstName()} + ' ' + ${messageSaved.author.getLastName()} + ' - ' + ${#temporals.format(messageSaved.creationDate, 'dd-MMM-yyyy')}">Author Name - Date</small>
-                </footer>
-            </article>
+            <div class="message-container" style="height: 500px; overflow-y: scroll;">
+                <article class="bubble p-3 w-100 d-flex flex-column m-0 mb-3" th:each="messageSaved : ${messages}">
+                    <p class="message m-0" th:text="${messageSaved.text}">Your message here</p>
+                    <footer class="text-secondary mt-4">
+                        <small class="author-date text-secondary m-0 font-size-sm" th:text="${messageSaved.author.getFirstName()} + ' ' + ${messageSaved.author.getLastName()} + ' - ' + ${#temporals.format(messageSaved.creationDate, 'hh:mm dd/MMM/yyyy')}">Author Name - Date</small>
+                    </footer>
+                </article>
+            </div>
             <form class="w-100 d-flex flex-column gap-3 mt-3 align-bottom" sec:authorize="isAuthenticated()" th:action="@{'/ticket/' + ${ticket.id} + '/message'}" th:object="${message}" method="post">
                 <textarea class="form-control" th:field="*{text}" placeholder="Write your message here..."></textarea>
                 <button class="btn btn-primary" type="submit">Send</button>
