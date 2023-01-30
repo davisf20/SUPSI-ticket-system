@@ -62,10 +62,10 @@
             </article>
         </section>
         <section class="rounded-4 p-3 w-100 border text-secondary">
-            <article class="bubble p-3 w-100 d-flex flex-column m-0">
-                <p class="message m-0">Your message here</p>
+            <article class="bubble p-3 w-100 d-flex flex-column m-0" th:each="message : ${messages}">
+                <p class="message m-0" th:text="${message.text}">Your message here</p>
                 <footer class="text-secondary mt-4">
-                    <small class="author-date text-secondary m-0 font-size-sm">Author Name - Date</small>
+                    <small class="author-date text-secondary m-0 font-size-sm" th:text="${message.user.getFirstName()} + ' ' + ${message.user.getLastName()} + ' - ' + ${#temporals.format(message.creationDate, 'dd-MMM-yyyy')}">Author Name - Date</small>
                 </footer>
             </article>
         </section>
