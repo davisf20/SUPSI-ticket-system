@@ -37,6 +37,28 @@
             </div>
             <br>
             <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="dueDate">Due date</label>
+                <input class="py-2 px-1 text-light xd-block w-100 border-0" id="dueDate" name="dueDate" type="date" th:field="*{dueDate}" placeholder="Due date">
+            </div>
+            <br>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="assignedTo">Assigned to</label>
+                <select class="d-block text-light border-0" id="assignedTo" name="assignedTo" th:field="*{assignedTo}">
+                    <option class="bg-dark" th:each="user : ${users}" th:value="${user.getId()}" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}"></option>
+                </select>
+            </div>
+            <br>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="estimatedTime">Estimate time</label>
+                <input class="py-2 px-1 text-light xd-block w-100 border-0" id="estimatedTime" name="estimatedTime" type="number" th:field="*{estimatedTime}" placeholder="Estimate time">
+            </div>
+            <br>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+                <label class="ps-1" for="timeSpent">Time spent</label>
+                <input class="py-2 px-1 text-light xd-block w-100 border-0" id="timeSpent" name="timeSpent" type="number" th:field="*{timeSpent}" placeholder="Time spent">
+            </div>
+            <br>
+            <div class="w-100 pb-2 mb-3 position-relative border-bottom">
                 <label class="ps-1" for="file">File</label>
                 <input class="w-100 px-1 d-block text-light outline-0 bg-dark rounded-4" type="file" id="file" name="file">
             </div>

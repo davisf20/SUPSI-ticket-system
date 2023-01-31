@@ -36,4 +36,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("tickets")
     private List<Ticket> tickets;
+
+    @OneToMany(mappedBy = "assignedTo")
+    @JsonIgnoreProperties("assignedTickets")
+    private List<Ticket> assignedTickets;
 }

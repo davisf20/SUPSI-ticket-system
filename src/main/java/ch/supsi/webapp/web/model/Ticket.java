@@ -41,6 +41,20 @@ public class Ticket {
     @Column
     private LocalDateTime creationDate;
 
+    @Column
+    private LocalDateTime dueDate;
+
+    @ManyToOne
+    @JoinColumn(name = "fk_assignedTo")
+    @JsonIgnoreProperties("assignedTo")
+    private User assignedTo;
+
+    @Column
+    private Integer estimatedTime;
+
+    @Column
+    private Integer timeSpent;
+
     @OneToOne
     @JoinColumn(name = "fk_attachment")
     private Attachment attachment;

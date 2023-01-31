@@ -1,10 +1,8 @@
 package ch.supsi.webapp.web.service;
 
 import ch.supsi.webapp.web.model.Ticket;
-import ch.supsi.webapp.web.model.User;
 import ch.supsi.webapp.web.repository.StatusRepository;
 import ch.supsi.webapp.web.repository.TicketRepository;
-import ch.supsi.webapp.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

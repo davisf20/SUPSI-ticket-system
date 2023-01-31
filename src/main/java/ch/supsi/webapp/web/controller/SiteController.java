@@ -49,6 +49,7 @@ public class SiteController {
     @GetMapping("/ticket/{id}")
     public String getTicket(@PathVariable int id, Model model) {
         model.addAttribute("ticket", ticketService.get(id));
+        model.addAttribute("users", userService.getAll());
 
         return "ticketDetails";
     }
@@ -58,6 +59,7 @@ public class SiteController {
     public String getForm(Model model) {
         model.addAttribute("ticket", new Ticket());
         model.addAttribute("typeList", typeService.getAll());
+        model.addAttribute("users", userService.getAll());
 
         return "createTicketForm";
     }
