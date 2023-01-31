@@ -183,6 +183,6 @@ public class SiteController {
         message.setTicket(ticketService.get(id));
         messageService.create(message);
 
-        return "redirect:/ticket/" + id;
+        return "ticketDetails :: messageList";
     }
 }
