@@ -17,7 +17,7 @@
     <section id="openColumn" class="container my-5">
         <h2>Opened Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${openedTickets}">
+            <article class="col card shadow-sm p-3 my-3" th:each="ticket : ${openedTickets}" th:href="@{'/board/' + ${ticket.id} + '/status'}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -32,7 +32,7 @@
     <section id="inProgressColumn" class="container my-5">
         <h2>In Progress Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${inProgressTickets}">
+            <article class="col card shadow-sm p-3 my-3" th:each="ticket : ${inProgressTickets}" th:href="@{'/board/' + ${ticket.id} + '/status'}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -47,7 +47,7 @@
     <section id="doneColumn" class="container my-5">
         <h2>Done Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${doneTickets}">
+            <article class="col card shadow-sm p-3 my-3" th:each="ticket : ${doneTickets}" th:href="@{'/board/' + ${ticket.id} + '/status'}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -62,7 +62,7 @@
     <section id="closedColumn" class="container my-5">
         <h2>Closed Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${closedTickets}">
+            <article class="col card shadow-sm p-3 my-3" th:each="ticket : ${closedTickets}" th:href="@{'/board/' + ${ticket.id} + '/status'}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -86,10 +86,54 @@
             <div class="border-top pt-3 px-2">
                 <p th:text="'Total tickets: ' + ${numberTickets}"></p>
             </div>
-            <div class="border-top pt-3 px-2" id="statusResults" th:href="@{'/board/{id}/status'}">
-                <article class="p-3 my-3" th:each="ticket : ${notClosedTickets}" th:fragment="statusResult">
+            <div class="border-top pt-3 px-2">
+                <article class="p-3 my-3" th:each="ticket : ${notClosedTickets}">
                     <p th:text="${ticket.title}">Ticket 1</p>
                     <p th:if="${ticket.estimatedTime} != null" th:text="${ticket.timeSpent / ticket.estimatedTime}">Ticket 1</p>
+                </article>
+            </div>
+            <div class="border-top pt-3 px-2" id="statusResults">
+                <article class="p-3 my-3" th:object="${ticketStatus}" th:fragment="statusResult">
+                    <h3 th:if="${ticketStatus} != null" th:text="${ticketStatus.title}">Ticket 1</h3>
+                    <div th:if="${ticketStatus.user} != null">
+                        <b class="d-block">Author:</b>
+                        <p class="text-light" th:text="${ticketStatus.user.getFirstName()} + ' ' + ${ticketStatus.user.getLastName()}">Pippo</p>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.type} != null">
+                        <b class="d-block">Type:</b>
+                        <p class="text-light" th:text="${ticketStatus.type.getName()}">Task</p>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.creationDate} != null">
+                        <b class="d-block">Date:</b>
+                        <time class="text-light" th:datetime="${ticketStatus.creationDate}" th:text="${#temporals.format(ticketStatus.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.status} != null">
+                        <b class="d-block">Status:</b>
+                        <p class="text-light" th:text="${ticketStatus.status.getName()}">Open</p>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.dueDate} != null">
+                        <b class="d-block">Due date:</b>
+                        <time class="text-light" th:datetime="${ticketStatus.dueDate}" th:text="${#temporals.format(ticketStatus.dueDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.assignedTo} != null">
+                        <b class="d-block">Assigned to:</b>
+                        <p class="text-light" th:text="${ticketStatus.assignedTo.getFirstName()} + ' ' + ${ticketStatus.assignedTo.getLastName()}">Assigned user.</p>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.estimatedTime} != null">
+                        <b class="d-block">Estimate time:</b>
+                        <p class="text-light" th:text="${ticketStatus.estimatedTime}">Estimate time.</p>
+                    </div>
+                    <br>
+                    <div th:if="${ticketStatus.timeSpent} != null">
+                        <b class="d-block">Time spent:</b>
+                        <p class="text-light" th:text="${ticketStatus.timeSpent}">Time spent.</p>
+                    </div>
                 </article>
             </div>
         </div>

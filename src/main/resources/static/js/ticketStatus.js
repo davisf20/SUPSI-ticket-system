@@ -1,19 +1,20 @@
 window.onload = function () {
-    const ticketStatus = document.getElementsByName("ticketStatus");
+    const ticketStatus = document.querySelectorAll('input[type="article"]');
     const statusResults = document.getElementById("statusResults");
 
     const base = window.location.origin;
     const path = window.location.pathname;
 
-    const id = document.getElementById("statusResults").href;
     const url = "/board/{id}/status";
 
     const option = {method: 'GET'};
 
-    ticketStatus.addEventListener('input', function(event) {
+    ticketStatus.addEventListener('click', function(event) {
         event.preventDefault();
 
-        fetch(url, option)
+        const request = ticketStatus.href;
+
+        fetch(request, option)
             .then(function (response) {
                 return response.text();
             })

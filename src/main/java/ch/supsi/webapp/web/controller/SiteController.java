@@ -203,6 +203,8 @@ public class SiteController {
         model.addAttribute("closedTickets", ticketService.getByStatus(statusService.get(4)));
         model.addAttribute("notClosedTickets", ticketService.getNotClosed());
 
+        model.addAttribute("ticketStatus", new Ticket());
+
         model.addAttribute("numberTickets", ticketService.getAll().size());
         model.addAttribute("numberOpenTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Open")).count());
         model.addAttribute("numberInProgressTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("In progress")).count());
@@ -220,6 +222,6 @@ public class SiteController {
     public String ticketStatus(@PathVariable int id, Model model) {
         model.addAttribute("ticketStatus", ticketService.get(id));
 
-        return "index :: statusResult";
+        return "board :: statusResult";
     }
 }
