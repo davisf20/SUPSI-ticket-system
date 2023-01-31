@@ -4,6 +4,8 @@ window.onload = function () {
 
     const base = window.location.origin;
     const path = window.location.pathname;
+
+    const id = document.getElementById("statusResults").href;
     const url = "/board/{id}/status";
 
     const option = {method: 'GET'};

@@ -86,7 +86,7 @@
             <div class="border-top pt-3 px-2">
                 <p th:text="'Total tickets: ' + ${numberTickets}"></p>
             </div>
-            <div class="border-top pt-3 px-2" id="statusResults">
+            <div class="border-top pt-3 px-2" id="statusResults" th:href="@{'/board/{id}/status'}">
                 <article class="p-3 my-3" th:each="ticket : ${notClosedTickets}" th:fragment="statusResult">
                     <p th:text="${ticket.title}">Ticket 1</p>
                     <p th:if="${ticket.estimatedTime} != null" th:text="${ticket.timeSpent / ticket.estimatedTime}">Ticket 1</p>
