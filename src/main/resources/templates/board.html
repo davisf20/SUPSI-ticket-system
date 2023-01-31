@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ticket service project">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Davis Fusco">
+
+    <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
+
+    <title>Ticket Service Home</title>
+</head>
+<body>
+<div th:replace="navbar :: nav"></div>
+<div th:replace="header :: head"></div>
+<main class="ms-md-5 d-md-flex align-items-stretch">
+    <section id="openColumn" class="container my-5">
+        <h2>Opened Tickets</h2>
+        <div class="gap-3">
+            <article class="col card shadow-sm p-3" th:each="ticket : ${openedTickets}">
+                <h3 th:text="${ticket.title}">Ticket 1</h3>
+                <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <div class="w-50 text-center bg-success bg-gradient rounded-pill">
+                    <p class="m-0 text-light" th:text="${ticket.status.getName()}">OPEN</p>
+                </div>
+                <p class="mt-3" th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+                <a sec:authorize="isAuthenticated()" th:if="${ticket.assignedTo} == ${authUser}" th:href="@{'/ticket/' + ${ticket.id} + '/timeSpent'}">Set time spent</a>
+            </article>
+        </div>
+    </section>
+    <section id="inProgressColumn" class="container my-5">
+        <h2>In Progress Tickets</h2>
+        <div class="gap-3">
+            <article class="col card shadow-sm p-3" th:each="ticket : ${inProgressTickets}">
+                <h3 th:text="${ticket.title}">Ticket 1</h3>
+                <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <div class="w-50 text-center bg-success bg-gradient rounded-pill">
+                    <p class="m-0 text-light" th:text="${ticket.status.getName()}">OPEN</p>
+                </div>
+                <p class="mt-3" th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+                <a sec:authorize="isAuthenticated()" th:if="${ticket.assignedTo} == ${authUser}" th:href="@{'/ticket/' + ${ticket.id} + '/timeSpent'}">Set time spent</a>
+            </article>
+        </div>
+    </section>
+    <section id="doneColumn" class="container my-5">
+        <h2>Done Tickets</h2>
+        <div class="gap-3">
+            <article class="col card shadow-sm p-3" th:each="ticket : ${doneTickets}">
+                <h3 th:text="${ticket.title}">Ticket 1</h3>
+                <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <div class="w-50 text-center bg-success bg-gradient rounded-pill">
+                    <p class="m-0 text-light" th:text="${ticket.status.getName()}">OPEN</p>
+                </div>
+                <p class="mt-3" th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+                <a sec:authorize="isAuthenticated()" th:if="${ticket.assignedTo} == ${authUser}" th:href="@{'/ticket/' + ${ticket.id} + '/timeSpent'}">Set time spent</a>
+            </article>
+        </div>
+    </section>
+    <section id="closedColumn" class="container my-5">
+        <h2>Closed Tickets</h2>
+        <div class="gap-3">
+            <article class="col card shadow-sm p-3" th:each="ticket : ${closedTickets}">
+                <h3 th:text="${ticket.title}">Ticket 1</h3>
+                <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+                <div class="w-50 text-center bg-success bg-gradient rounded-pill">
+                    <p class="m-0 text-light" th:text="${ticket.status.getName()}">OPEN</p>
+                </div>
+                <p class="mt-3" th:text="${#strings.abbreviate(ticket.description, 30)}">This is the description...</p>
+                <a th:href="@{'/ticket/' + ${ticket.id}}">More details</a>
+                <a sec:authorize="isAuthenticated()" th:if="${ticket.assignedTo} == ${authUser}" th:href="@{'/ticket/' + ${ticket.id} + '/timeSpent'}">Set time spent</a>
+            </article>
+        </div>
+    </section>
+    <aside class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark rounded-top">
+        <h2 class="d-flex align-items-center flex-shrink-0 p-3 text-light text-decoration-none border-bottom">Info</h2>
+        <div class="list-group list-group-flush border-bottom">
+            <div class="px-2">
+                <p th:text="'Opened tickets: ' + ${numberOpenTickets}"></p>
+                <p th:text="'In progress tickets: ' + ${numberInProgressTickets}"></p>
+                <p th:text="'Done tickets: ' + ${numberDoneTickets}"></p>
+                <p th:text="'Closed tickets: ' + ${numberClosedTickets}"></p>
+            </div>
+            <div class="border-top pt-3 px-2">
+                <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+            </div>
+            <div class="border-top pt-3 px-2">
+                <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+            </div>
+        </div>
+    </aside>
+</main>
+<div th:replace="footer :: footer"></div>
+<script type="text/javascript" src="../static/js/search.js" th:src="@{'/js/search.js'}"></script>
+</body>
+</html>

@@ -194,4 +194,24 @@ public class SiteController {
 
         return "redirect:/ticket/" + id;
     }
+
+    @GetMapping("/board")
+    public String getBoard(Model model, HttpSession session) {
+        model.addAttribute("openedTickets", ticketService.getByStatus(statusService.get(1)));
+        model.addAttribute("inProgressTickets", ticketService.getByStatus(statusService.get(2)));
+        model.addAttribute("doneTickets", ticketService.getByStatus(statusService.get(3)));
+        model.addAttribute("closedTickets", ticketService.getByStatus(statusService.get(4)));
+
+        model.addAttribute("numberTickets", ticketService.getAll().size());
+        model.addAttribute("numberOpenTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Open")).count());
+        model.addAttribute("numberInProgressTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("In progress")).count());
+        model.addAttribute("numberDoneTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Done")).count());
+        model.addAttribute("numberClosedTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Closed")).count());
+
+        SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) sc.getAuthentication().getPrincipal();
+        model.addAttribute("authUser", userService.getByUsername(user.getUsername()));
+
+        return "board";
+    }
 }

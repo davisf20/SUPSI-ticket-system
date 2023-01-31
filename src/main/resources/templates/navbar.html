@@ -17,6 +17,7 @@
             <img src="../static/images/logo.png" th:src="@{'/images/logo.png'}" alt="logo" class="logo" width="66"
                  height="36.96">
             <a th:href="@{'/'}" class="text-light text-decoration-none">Home</a>
+            <a th:href="@{'/board'}" class="text-light text-decoration-none">Board</a>
             <a sec:authorize="isAuthenticated()" th:href="@{'/ticket/new'}" class="text-light text-decoration-none">Create a Ticket</a>
         </div>
         <div class="d-flex gap-2">

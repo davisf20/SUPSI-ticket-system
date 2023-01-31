@@ -1,5 +1,6 @@
 package ch.supsi.webapp.web.repository;
 
+import ch.supsi.webapp.web.model.Status;
 import ch.supsi.webapp.web.model.Ticket;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,4 +12,6 @@ import java.util.List;
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     @Query("SELECT t FROM Ticket t JOIN t.user u WHERE t.title LIKE %:searchTerm% OR u.firstName LIKE %:searchTerm% OR u.lastName LIKE %:searchTerm% OR t.description LIKE %:searchTerm%")
     List<Ticket> findByTitleContainingOrAuthorContainingOrDescriptionContaining(String searchTerm);
+
+    List<Ticket> findByStatus(Status status);
 }
