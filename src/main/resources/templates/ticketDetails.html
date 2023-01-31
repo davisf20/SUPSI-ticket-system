@@ -44,6 +44,26 @@
             </div>
             <br>
             <div>
+                <b class="d-block">Due date:</b>
+                <time class="text-light" th:datetime="${ticket.dueDate}" th:text="${#temporals.format(ticket.dueDate, 'dd-MMM-yyyy')}">2022-10-25</time>
+            </div>
+            <br>
+            <div>
+                <b class="d-block">Assigned to:</b>
+                <p class="text-light" th:if="${ticket.assignedTo} != null" th:text="${ticket.assignedTo.getFirstName()} + ' ' + ${ticket.assignedTo.getLastName()}">Assigned user.</p>
+            </div>
+            <br>
+            <div>
+                <b class="d-block">Estimate time:</b>
+                <p class="text-light" th:text="${ticket.estimatedTime}">Estimate time.</p>
+            </div>
+            <br>
+            <div>
+                <b class="d-block">Time spent:</b>
+                <p class="text-light" th:text="${ticket.timeSpent}">Time spent.</p>
+            </div>
+            <br>
+            <div>
                 <b class="d-block">File:</b>
                 <a class="text-light" th:if="${ticket.attachment} != null" th:href="@{'/ticket/' + ${ticket.id} + '/attachment'}" th:text="${ticket.attachment.name}">File 1</a>
                 <p class="text-light" th:if="${ticket.attachment} == null">Empty</p>

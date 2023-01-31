@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Ticket service project">
+  <meta name="keywords" content="HTML, CSS, JavaScript">
+  <meta name="author" content="Davis Fusco">
+
+  <link th:href="@{/webjars/bootstrap/5.2.2/css/bootstrap.min.css}" rel="stylesheet">
+
+  <title>Ticket Time Spent</title>
+</head>
+<body>
+<div th:replace="navbar :: nav"></div>
+<div th:replace="header :: head"></div>
+<main class="container my-5 d-flex flex-wrap justify-content-center align-items-center w-100">
+  <section class="rounded-4 p-5 w-50 text-secondary bg-dark">
+    <form class="w-100" action="#" th:action="@{'/ticket/' + ${ticket.id} + '/timeSpent'}" th:object="${ticket}" method="post" enctype="multipart/form-data">
+      <h2 class="text-center text-light" th:text="${ticket.title}">Ticket 1</h2>
+      <br>
+      <div class="w-100 pb-2 mb-3 position-relative border-bottom">
+        <label class="ps-1" for="timeSpent">Time spent</label>
+        <input class="py-2 px-1 text-light bg-dark xd-block w-100 border-0" id="timeSpent" name="timeSpent" type="number" th:field="*{timeSpent}" placeholder="Time spent">
+      </div>
+      <br>
+      <div class="d-flex flex-wrap justify-content-center pt-2 w-100">
+        <input class="btn rounded-4 text-dark bg-light bg-gradient w-100" type="submit" value="Save ticket">
+      </div>
+    </form>
+  </section>
+</main>
+</body>
+</html>

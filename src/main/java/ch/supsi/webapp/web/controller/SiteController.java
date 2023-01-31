@@ -34,13 +34,17 @@ public class SiteController {
 
     // return the list of tickets
     @GetMapping("/")
-    public String getIndex(Model model) {
+    public String getIndex(Model model, HttpSession session) {
         model.addAttribute("tickets", ticketService.getAll());
         model.addAttribute("numberTickets", ticketService.getAll().size());
         model.addAttribute("numberOpenTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Open")).count());
         model.addAttribute("numberInProgressTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("In progress")).count());
         model.addAttribute("numberDoneTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Done")).count());
         model.addAttribute("numberClosedTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Closed")).count());
+
+        SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) sc.getAuthentication().getPrincipal();
+        model.addAttribute("authUser", userService.getByUsername(user.getUsername()));
 
         return "index";
     }
@@ -101,6 +105,7 @@ public class SiteController {
         model.addAttribute("userList", userService.getAll());
         model.addAttribute("typeList", typeService.getAll());
         model.addAttribute("statusList", statusService.getAll());
+        model.addAttribute("users", userService.getAll());
 
         return "editTicketForm";
     }
@@ -113,6 +118,8 @@ public class SiteController {
         t.setType(ticket.getType());
         t.setStatus(ticket.getStatus());
         t.setDescription(ticket.getDescription());
+        t.setAssignedTo(ticket.getAssignedTo());
+        t.setEstimatedTime(ticket.getEstimatedTime());
         if (!file.isEmpty()) {
             Attachment attachment = new Attachment();
             attachment.setName(file.getOriginalFilename());
@@ -170,5 +177,21 @@ public class SiteController {
         model.addAttribute("tickets", ticketService.search(q));
 
         return "index :: searchResult";
+    }
+
+    @GetMapping("/ticket/{id}/timeSpent")
+    public String getTicketTimeSpent(@PathVariable int id, Model model) {
+        model.addAttribute("ticket", ticketService.get(id));
+
+        return "timeSpent";
+    }
+
+    @PostMapping("/ticket/{id}/timeSpent")
+    public String setTicketTimeSpent(@PathVariable int id, Ticket ticket) {
+        Ticket t = ticketService.get(id);
+        t.setTimeSpent(ticket.getTimeSpent());
+        ticketService.update(t);
+
+        return "redirect:/ticket/" + id;
     }
 }
