@@ -14,4 +14,6 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
     List<Ticket> findByTitleContainingOrAuthorContainingOrDescriptionContaining(String searchTerm);
 
     List<Ticket> findByStatus(Status status);
+
+    List<Ticket> findByStatusNot(Status orElse);
 }

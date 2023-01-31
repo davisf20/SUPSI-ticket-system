@@ -34,6 +34,7 @@ public class WebSecurityConfig {
                 .mvcMatchers("/login", "/register").permitAll()
                 .mvcMatchers("/tickets/**").permitAll()
                 .mvcMatchers("/board").permitAll()
+                .mvcMatchers("/board/*/status").authenticated()
                 .anyRequest().authenticated()
             .and()
                 .formLogin()

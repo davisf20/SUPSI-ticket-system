@@ -201,6 +201,7 @@ public class SiteController {
         model.addAttribute("inProgressTickets", ticketService.getByStatus(statusService.get(2)));
         model.addAttribute("doneTickets", ticketService.getByStatus(statusService.get(3)));
         model.addAttribute("closedTickets", ticketService.getByStatus(statusService.get(4)));
+        model.addAttribute("notClosedTickets", ticketService.getNotClosed());
 
         model.addAttribute("numberTickets", ticketService.getAll().size());
         model.addAttribute("numberOpenTickets", ticketService.getAll().stream().filter(ticket -> ticket.getStatus().getName().equals("Open")).count());
@@ -213,5 +214,12 @@ public class SiteController {
         model.addAttribute("authUser", userService.getByUsername(user.getUsername()));
 
         return "board";
+    }
+
+    @GetMapping("/board/{id}/status")
+    public String ticketStatus(@PathVariable int id, Model model) {
+        model.addAttribute("ticketStatus", ticketService.get(id));
+
+        return "index :: statusResult";
     }
 }

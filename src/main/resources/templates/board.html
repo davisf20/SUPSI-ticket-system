@@ -17,7 +17,7 @@
     <section id="openColumn" class="container my-5">
         <h2>Opened Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3" th:each="ticket : ${openedTickets}">
+            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${openedTickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -32,7 +32,7 @@
     <section id="inProgressColumn" class="container my-5">
         <h2>In Progress Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3" th:each="ticket : ${inProgressTickets}">
+            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${inProgressTickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -47,7 +47,7 @@
     <section id="doneColumn" class="container my-5">
         <h2>Done Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3" th:each="ticket : ${doneTickets}">
+            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${doneTickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -62,7 +62,7 @@
     <section id="closedColumn" class="container my-5">
         <h2>Closed Tickets</h2>
         <div class="gap-3">
-            <article class="col card shadow-sm p-3" th:each="ticket : ${closedTickets}">
+            <article class="col card shadow-sm p-3 my-3" name="ticketStatus" th:each="ticket : ${closedTickets}">
                 <h3 th:text="${ticket.title}">Ticket 1</h3>
                 <time class="text-secondary" th:datetime="${ticket.creationDate}" th:text="${#temporals.format(ticket.creationDate, 'dd-MMM-yyyy')}">2022-10-25</time>
                 <div class="w-50 text-center bg-success bg-gradient rounded-pill">
@@ -86,13 +86,16 @@
             <div class="border-top pt-3 px-2">
                 <p th:text="'Total tickets: ' + ${numberTickets}"></p>
             </div>
-            <div class="border-top pt-3 px-2">
-                <p th:text="'Total tickets: ' + ${numberTickets}"></p>
+            <div class="border-top pt-3 px-2" id="statusResults">
+                <article class="p-3 my-3" th:each="ticket : ${notClosedTickets}" th:fragment="statusResult">
+                    <p th:text="${ticket.title}">Ticket 1</p>
+                    <p th:if="${ticket.estimatedTime} != null" th:text="${ticket.timeSpent / ticket.estimatedTime}">Ticket 1</p>
+                </article>
             </div>
         </div>
     </aside>
 </main>
 <div th:replace="footer :: footer"></div>
-<script type="text/javascript" src="../static/js/search.js" th:src="@{'/js/search.js'}"></script>
+<script type="text/javascript" src="../static/js/ticketStatus.js" th:src="@{'/js/ticketStatus.js'}"></script>
 </body>
 </html>

@@ -66,4 +66,8 @@ public class TicketService {
     public List<Ticket> getByStatus(Status status) {
         return ticketRepository.findByStatus(status);
     }
+
+    public List<Ticket> getNotClosed() {
+        return ticketRepository.findByStatusNot(statusRepository.findById(4).orElse(null));
+    }
 }
