@@ -40,4 +40,8 @@ public class User {
     @OneToMany(mappedBy = "assignedTo")
     @JsonIgnoreProperties("assignedTickets")
     private List<Ticket> assignedTickets;
+
+    @ManyToMany(mappedBy = "watchers")
+    @JsonIgnoreProperties("watchers")
+    private List<Ticket> watchedTickets;
 }

@@ -224,4 +224,15 @@ public class SiteController {
 
         return "board :: statusResult";
     }
+
+    @GetMapping("/watches")
+    public String getWatches(Model model, HttpSession session) {
+        SecurityContextImpl sc = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) sc.getAuthentication().getPrincipal();
+
+        model.addAttribute("authUser", userService.getByUsername(user.getUsername()));
+        model.addAttribute("watchesTicket", userService.getByUsername(user.getUsername()).getWatchedTickets());
+
+        return "watches";
+    }
 }

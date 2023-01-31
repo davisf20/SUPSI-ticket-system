@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Entity
@@ -58,4 +59,13 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "fk_attachment")
     private Attachment attachment;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "ticket_watcher",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnoreProperties("watchedTickets")
+    private List<User> watchers;
 }
