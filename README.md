@@ -1,3 +1,11 @@
+# Applicazioni-Web1-2022-2023
+## Course project - Ticket System
+M-I5040 C-I5041(P) Applicazioni Web 1  - SUPSI - I3A -  2022/23
+
+
+
+
+
 # Description
 This API service provides a RESTful API to manage a web application that will serve as a ticket tracking platform.
 The service allows you to view, create, edit and delete tickets. The various requests will be made by sending the Ticket values in JSON format.
